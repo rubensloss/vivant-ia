@@ -196,16 +196,19 @@
       
       <!-- Vídeo Horizontal de Fundo com Fallback de Imagem (Positano & Costa Amalfitana) -->
       <div class="absolute inset-0 z-0 overflow-hidden">
-        <video id="hero-video" autoplay loop muted playsinline poster="thumb1.jpg" class="w-full h-full object-cover scale-105 transform transition-transform duration-1000">
+        <video id="hero-video" autoplay loop muted playsinline webkit-playsinline poster="thumb1.jpg" class="w-full h-full object-cover scale-105 transform transition-transform duration-1000">
           <source src="positano-riva-1.mp4" type="video/mp4">
         </video>
         
-        <!-- Filtro Cinematográfico Direcional: Nitidez para o texto à esquerda, sol e mar vivos à direita -->
-        <div class="absolute inset-0 bg-gradient-to-r from-surface-950/85 via-surface-950/50 to-surface-950/20"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-surface-950/90 via-transparent to-black/30"></div>
+        <!-- Filtro Mobile Exclusivo: Contraste impecável em telas verticais de smartphone -->
+        <div class="block sm:hidden absolute inset-0 bg-gradient-to-b from-surface-950/80 via-surface-950/65 to-surface-950/90"></div>
+
+        <!-- Filtro Desktop Direcional: Texto escurecido à esquerda, mar e sol abertos à direita -->
+        <div class="hidden sm:block absolute inset-0 bg-gradient-to-r from-surface-950/85 via-surface-950/50 to-surface-950/20"></div>
+        <div class="hidden sm:block absolute inset-0 bg-gradient-to-t from-surface-950/90 via-transparent to-black/30"></div>
       </div>
 
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 w-full">
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-20 w-full">
         
         <!-- Badges Flutuantes com Animação (Responsivos para telas pequenas) -->
         <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
@@ -240,8 +243,8 @@
         </div>
 
         <!-- Subtítulo Interativo em Fonte Display Marcante (Efeito Itália ao passar o dedo/cursor) -->
-        <div id="interactive-hero-subtitle" onclick="triggerTitleInteraction()" class="group/sub cursor-pointer max-w-3xl mb-6 sm:mb-8 transition-all duration-300 select-none active:scale-[0.99]">
-          <p class="font-display font-bold text-base sm:text-xl lg:text-2xl text-white leading-snug sm:leading-relaxed drop-shadow-[0_3px_12px_rgba(0,0,0,0.95)] tracking-wide">
+        <div id="interactive-hero-subtitle" onclick="triggerTitleInteraction()" class="group/sub cursor-pointer max-w-3xl mb-6 sm:mb-8 transition-all duration-300 select-none active:scale-[0.99] touch-manipulation">
+          <p class="font-display font-bold text-base sm:text-xl lg:text-2xl text-white leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] tracking-wide">
             Expedição de Alto Padrão com saídas selecionadas. Dez dias imersivos pela 
             <span class="inline-block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-white to-red-500 font-extrabold underline decoration-emerald-400/50 underline-offset-4 group-hover/sub:from-emerald-300 group-hover/sub:to-red-400 transition-all duration-500">
               Itália
@@ -257,7 +260,7 @@
             <span class="text-rose-400 group-hover/sub:text-rose-300 font-bold transition-colors">
               Positano e Capri
             </span>. 
-            <span class="block sm:inline mt-1 sm:mt-0 text-zinc-300 group-hover/sub:text-white font-medium text-xs sm:text-base">
+            <span class="block sm:inline mt-1.5 sm:mt-0 text-zinc-300 group-hover/sub:text-white font-medium text-xs sm:text-base">
               Consultoria exclusiva sob medida.
             </span>
           </p>
@@ -265,7 +268,7 @@
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
             <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse" style="animation-delay: 0.15s"></span>
             <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" style="animation-delay: 0.3s"></span>
-            <span class="text-zinc-300">Toque no texto para ver os efeitos e cores da Itália</span>
+            <span class="text-zinc-300">Toque no texto para sentir a atmosfera da Itália</span>
           </div>
         </div>
 
@@ -2206,6 +2209,21 @@
         });
         heroVideo.muted = true;
         heroVideo.play().catch(e => console.log('Autoplay do loop aéreo aguarda interação:', e));
+      }
+
+      // Suporte Tátil Imediato para Smartphones (Touch & Swipe Sensorial)
+      const mobileSub = document.getElementById('interactive-hero-subtitle');
+      if (mobileSub) {
+        mobileSub.addEventListener('touchstart', () => {
+          mobileSub.classList.add('scale-[1.015]', 'brightness-125');
+          if (navigator.vibrate) navigator.vibrate(25);
+        }, { passive: true });
+        
+        mobileSub.addEventListener('touchend', () => {
+          setTimeout(() => {
+            mobileSub.classList.remove('scale-[1.015]', 'brightness-125');
+          }, 350);
+        }, { passive: true });
       }
     });
 
