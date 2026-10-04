@@ -1,0 +1,7 @@
+# Redundant/Unused video files
+rome-colosseum.webm
+positano-seamless.mp4
+
+# Python cache / server logs
+__pycache__/
+*.log

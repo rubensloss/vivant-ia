@@ -1,0 +1,2601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>VIVANT IA | Roteiros Vivos & Cockpit 360° para Agências de Turismo</title>
+  <!-- Google Fonts: Modern Luxury Sans (Outfit + Plus Jakarta Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22',
+            },
+            surface: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              200: '#e2e8f0',
+              300: '#cbd5e1',
+              800: '#1e293b',
+              900: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Prevenção de quebra de layout mobile e preservação de position: sticky no desktop */
+    html, body {
+      overflow-x: clip;
+      max-width: 100vw;
+      width: 100%;
+      -webkit-text-size-adjust: 100%;
+      touch-action: manipulation;
+    }
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Fixação Inteligente do Card de Investimento no Desktop (Sticky Permanente ao Rolar) */
+    @media (min-width: 1024px) {
+      .desktop-sticky-card {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 7rem !important; /* 112px - alinhado abaixo da barra de navegação */
+        z-index: 30 !important;
+      }
+    }
+
+    /* Transições e Efeitos de Movimento Modernos */
+    .glass-header {
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #059669;
+      border-radius: 999px;
+    }
+    .pulse-badge {
+      animation: subtlePulse 2s infinite ease-in-out;
+    }
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.88; transform: scale(1.03); }
+    }
+    /* Efeito de levitação nos cards ao passar o cursor */
+    .hover-lift {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hover-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    }
+    /* Efeito de brilho de borda */
+    .glow-hover:hover {
+      border-color: #10b981;
+    }
+    /* Transição suave de slides */
+    .slide-fade {
+      transition: opacity 0.6s ease-in-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
+</head>
+<body class="bg-surface-50 text-surface-900 font-sans antialiased selection:bg-brand-500 selection:text-white custom-scrollbar w-full">
+
+  <!-- ========================================================
+       TOP GLOBAL SWITCHER: EXPERIÊNCIA DO CLIENTE vs. COCKPIT AGÊNCIA
+       ======================================================== -->
+  <header class="sticky top-0 z-50 glass-header text-white">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
+      
+      <!-- Marca da Plataforma / Agência (VIVANT IA) -->
+      <div class="flex items-center space-x-2 sm:space-x-3 group cursor-pointer shrink-0">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-brand-400 via-emerald-200 to-white flex items-center justify-center text-brand-950 font-extrabold font-display text-base sm:text-xl shadow-md group-hover:scale-105 transition-transform duration-300">
+          V
+        </div>
+        <div>
+          <div class="flex items-center space-x-1.5">
+            <span class="font-display tracking-wider text-xs sm:text-sm font-extrabold uppercase block group-hover:text-brand-300 transition-colors">VIVANT</span>
+            <span class="px-1.5 py-0.5 rounded-md bg-gradient-to-r from-red-600 to-rose-500 text-white font-extrabold text-[9px] tracking-widest shadow-sm">IA</span>
+          </div>
+          <span class="text-[9px] text-zinc-400 tracking-wider uppercase hidden sm:block">Plataforma Inteligente de Viagens</span>
+        </div>
+      </div>
+
+      <!-- Seletor de Modo Desktop (Oculto no celular para não esmagar a tela) -->
+      <div class="hidden md:flex items-center bg-surface-900/90 p-1 rounded-full border border-white/10 shadow-inner">
+        <button id="btn-mode-traveler" onclick="switchMode('traveler')" class="px-4 py-1.5 rounded-full text-xs font-bold flex items-center space-x-2 transition-all duration-300 bg-brand-600 text-white shadow-sm hover:scale-[1.02] active:scale-[0.98]">
+          <i class="ph-bold ph-compass"></i>
+          <span>Visão do Viajante (Proposta 360°)</span>
+        </button>
+        <button id="btn-mode-agency" onclick="switchMode('agency')" class="px-4 py-1.5 rounded-full text-xs font-semibold flex items-center space-x-2 transition-all duration-300 text-zinc-300 hover:text-white hover:scale-[1.02] active:scale-[0.98]">
+          <i class="ph-bold ph-chart-pie-slice"></i>
+          <span>Cockpit da Agência (Gestão & Operação)</span>
+          <span class="ml-1 px-2 py-0.5 text-[9px] font-bold bg-brand-600 text-white rounded-full">PRO</span>
+        </button>
+      </div>
+
+      <!-- Ações Rápidas de Cabeçalho (Responsivo) -->
+      <div class="flex items-center space-x-1.5 sm:space-x-3 shrink-0">
+        <button onclick="openVipModal('Viajante VIP', 'traveler')" class="flex items-center space-x-1 px-2.5 py-1.5 text-[11px] sm:text-xs font-bold rounded-lg bg-red-600/20 hover:bg-red-600/30 text-rose-300 border border-red-500/40 transition-all hover:scale-105">
+          <i class="ph-fill ph-crown text-red-400 text-xs sm:text-sm"></i>
+          <span class="hidden sm:inline">Link VIP Clicável</span>
+          <span class="sm:hidden">VIP</span>
+        </button>
+        <button onclick="openApprovalModal()" class="flex items-center space-x-1.5 px-3 sm:px-4 py-1.5 text-xs font-bold rounded-lg bg-brand-600 hover:bg-brand-500 text-white transition-all shadow-md hover:scale-105 active:scale-95">
+          <i class="ph-bold ph-check-circle text-xs sm:text-sm"></i>
+          <span>Aprovar</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- SELETOR DE MODO MOBILE (Segmented Control 100% nativo para smartphones) -->
+    <div class="md:hidden px-3 pb-2.5 pt-1 bg-surface-900 border-t border-white/10">
+      <div class="grid grid-cols-2 p-1 bg-black/50 rounded-xl border border-white/10 text-xs">
+        <button id="btn-mode-traveler-mob" onclick="switchMode('traveler')" class="py-2 px-2 rounded-lg font-bold flex items-center justify-center space-x-1.5 transition-all bg-brand-600 text-white shadow-sm">
+          <i class="ph-bold ph-compass text-sm"></i>
+          <span>Viajante 360°</span>
+        </button>
+        <button id="btn-mode-agency-mob" onclick="switchMode('agency')" class="py-2 px-2 rounded-lg font-semibold flex items-center justify-center space-x-1.5 transition-all text-zinc-300 hover:text-white">
+          <i class="ph-bold ph-chart-pie-slice text-sm"></i>
+          <span>Cockpit Agência</span>
+          <span class="px-1.5 py-0.2 text-[8px] font-bold bg-brand-600 text-white rounded">PRO</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       MODO 1: VISÃO DO VIAJANTE (PROPOSTA DE CONVERSÃO 360°)
+       ======================================================== -->
+  <main id="view-traveler" class="transition-opacity duration-300">
+    
+    <!-- Áudio de Música Italiana Tradicional Real (Tarantella Napoletana Gravada) -->
+    <audio id="audio-italian-music" loop preload="metadata">
+      <source src="bushwick-tarantella.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Hero Cinematográfico com VÍDEO HORIZONTAL & FILTRO TRANSLÚCIDO CLARO -->
+    <section class="relative bg-surface-900 text-white overflow-hidden min-h-[520px] sm:min-h-[580px] flex items-center">
+      
+      <!-- Vídeo Horizontal de Fundo com Fallback de Imagem (Positano & Costa Amalfitana) -->
+      <div class="absolute inset-0 z-0 overflow-hidden">
+        <video id="hero-video" autoplay loop muted playsinline poster="thumb1.jpg" class="w-full h-full object-cover scale-105 transform transition-transform duration-1000">
+          <source src="positano-riva-1.mp4" type="video/mp4">
+        </video>
+        
+        <!-- Filtro Cinematográfico Direcional: Nitidez para o texto à esquerda, sol e mar vivos à direita -->
+        <div class="absolute inset-0 bg-gradient-to-r from-surface-950/85 via-surface-950/50 to-surface-950/20"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-950/90 via-transparent to-black/30"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 w-full">
+        
+        <!-- Badges Flutuantes com Animação (Responsivos para telas pequenas) -->
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+          <span class="inline-flex items-center space-x-1.5 px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold bg-white/20 text-white border border-white/30 backdrop-blur-md hover:bg-white/30 transition-colors shadow-sm">
+            <i class="ph-fill ph-sparkle text-brand-300"></i>
+            <span>Curadoria de Luxo • Fernanda Lins</span>
+          </span>
+          <span class="inline-flex items-center space-x-1.5 px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold bg-brand-600 text-white shadow-lg pulse-badge">
+            <i class="ph-bold ph-calendar-check"></i>
+            <span>Temporada 2026/2027 • Vagas Limitadas</span>
+          </span>
+          <button onclick="openCinemaModal()" class="inline-flex items-center space-x-1.5 px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold bg-white/25 hover:bg-white/35 text-white border border-white/35 backdrop-blur-md transition-all active:scale-95 cursor-pointer shadow-md">
+            <i class="ph-fill ph-play-circle text-emerald-400 text-sm"></i>
+            <span>Vídeo Aéreo • Positano & Iate Riva</span>
+          </button>
+          <span class="text-[11px] sm:text-xs text-zinc-200 flex items-center space-x-1 font-medium bg-black/40 px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-sm">
+            <i class="ph-bold ph-map-pin text-brand-400"></i>
+            <span>Roma • Florença • Costa Amalfitana</span>
+          </span>
+        </div>
+
+        <!-- Título Interativo (com suporte a toque no mobile e hover dinâmico) -->
+        <div class="relative group cursor-pointer inline-block max-w-full" onclick="triggerTitleInteraction()">
+          <h1 id="interactive-hero-title" class="font-display text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-[1.12] mb-2 drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] select-none transition-all duration-300 group-hover:scale-[1.01] active:scale-[0.98]">
+            A Essência da <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-white to-red-500 group-hover:from-emerald-300 group-hover:to-red-400 transition-all duration-500 underline decoration-red-500/60 underline-offset-8">Itália</span> <span class="group-hover:text-rose-400 transition-colors">Romântica</span> & <span class="group-hover:text-emerald-300 transition-colors">Gastronômica</span>
+          </h1>
+          <div class="flex items-center space-x-2 text-[10px] sm:text-[11px] text-zinc-300 mb-4 sm:mb-6 opacity-85 group-hover:opacity-100 transition-opacity">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+            <i class="ph-fill ph-hand-tap text-rose-300 text-sm"></i>
+            <span id="title-hint-text">Toque no título para ouvir a Tarantella e ver efeitos</span>
+          </div>
+        </div>
+
+        <!-- Subtítulo Editorial Elegante em Branco/Champagne de Alta Legibilidade -->
+        <div class="border-l-2 border-brand-500/80 pl-4 py-1 mb-6 sm:mb-8 max-w-2xl">
+          <p class="text-sm sm:text-base lg:text-lg text-zinc-100 font-normal leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+            Expedição de Alto Padrão com saídas selecionadas. Dez dias imersivos pela Itália combinando <span class="text-amber-300 font-semibold">arte renascentista</span>, <span class="text-amber-300 font-semibold">alta gastronomia toscana</span> e navegação privativa pelas falésias de <span class="text-white font-semibold">Positano e Capri</span>. Consultoria exclusiva sob medida.
+          </p>
+        </div>
+
+        <!-- Barra de Ações Rápidas (Grid 2 colunas no celular / Linha fluida no desktop) -->
+        <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3 pt-4 border-t border-white/20">
+          <button onclick="scrollToSection('itinerario')" class="col-span-2 sm:col-span-1 px-4 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs transition-all shadow-lg hover:scale-105 active:scale-95 flex items-center justify-center space-x-2">
+            <i class="ph-bold ph-list-numbers text-base"></i>
+            <span>Ver Itinerário Completo</span>
+          </button>
+          
+          <!-- Assistir Vídeo HD Cinema -->
+          <button onclick="openCinemaModal()" class="px-3 sm:px-4 py-3 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs transition-all backdrop-blur-md border border-white/30 active:scale-95 flex items-center justify-center space-x-1.5 shadow-md group">
+            <i class="ph-fill ph-film-strip text-emerald-400 text-base group-hover:scale-110 transition-transform"></i>
+            <span>Assistir Vídeo HD</span>
+          </button>
+
+          <!-- Player de Música Italiana Tradicional Real -->
+          <button id="btn-italian-music" onclick="toggleItalianMusic()" class="px-3 sm:px-4 py-3 rounded-xl bg-red-600/25 hover:bg-red-600/40 text-rose-100 border border-red-500/50 font-bold text-xs transition-all backdrop-blur-md active:scale-95 flex items-center justify-center space-x-2 shadow-md">
+            <div id="equalizer-bars" class="flex items-end space-x-0.5 h-3.5">
+              <span class="w-1 h-2 bg-emerald-400 rounded-full animate-bounce"></span>
+              <span class="w-1 h-3.5 bg-white rounded-full animate-bounce" style="animation-delay: 0.15s"></span>
+              <span class="w-1 h-1.5 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.3s"></span>
+            </div>
+            <i class="ph-fill ph-music-notes text-sm text-red-400"></i>
+            <span id="text-music-status">Trilha Italiana 🇮🇹</span>
+          </button>
+
+          <!-- Link VIP Clicável -->
+          <button onclick="openVipModal('Viajante VIP', 'traveler')" class="px-3 sm:px-4 py-3 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 text-white font-extrabold text-xs transition-all shadow-lg active:scale-95 flex items-center justify-center space-x-1.5 shadow-red-950/40">
+            <i class="ph-fill ph-crown text-base text-rose-200"></i>
+            <span>Passaporte VIP</span>
+          </button>
+
+          <!-- Controle do Vídeo de Fundo -->
+          <button id="btn-toggle-video" onclick="toggleHeroVideo()" class="px-3 sm:px-4 py-3 rounded-xl bg-black/40 hover:bg-black/60 text-zinc-200 font-semibold text-xs transition-all backdrop-blur-md border border-white/15 active:scale-95 flex items-center justify-center space-x-1.5">
+            <i id="icon-toggle-video" class="ph-fill ph-pause-circle text-brand-300 text-base"></i>
+            <span id="text-toggle-video">Pausar Fundo</span>
+          </button>
+
+          <!-- Convidar Amigo -->
+          <button onclick="openInviteModal()" class="col-span-2 sm:col-span-1 px-3 sm:px-4 py-3 rounded-xl bg-black/40 hover:bg-black/60 text-zinc-200 font-semibold text-xs transition-all border border-white/20 active:scale-95 flex items-center justify-center space-x-1.5">
+            <i class="ph-bold ph-user-plus text-base text-rose-300"></i>
+            <span>Convidar Amigo</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Sub-Navegação Fixa com Movimento Suave e Rolagem Touch Horizontal Perfeita -->
+    <div class="bg-white border-b border-surface-200 sticky top-14 sm:top-16 z-40 shadow-sm overflow-hidden">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <nav class="flex space-x-4 sm:space-x-8 overflow-x-auto py-2.5 sm:py-3 text-xs font-bold no-scrollbar scroll-smooth">
+          <button onclick="scrollToSection('itinerario')" class="text-brand-800 border-b-2 border-brand-600 pb-1 flex items-center space-x-1.5 whitespace-nowrap shrink-0 hover:text-brand-900 transition-colors">
+            <i class="ph-bold ph-calendar-blank text-brand-600 text-sm"></i>
+            <span>1. Itinerário Dia a Dia</span>
+          </button>
+          <button onclick="scrollToSection('guia-360')" class="text-surface-800 hover:text-brand-700 pb-1 flex items-center space-x-1.5 whitespace-nowrap shrink-0 transition-colors">
+            <i class="ph-bold ph-fork-knife text-sm"></i>
+            <span>2. Guia 360° Destino</span>
+          </button>
+          <button onclick="scrollToSection('personalizacao')" class="text-surface-800 hover:text-brand-700 pb-1 flex items-center space-x-1.5 whitespace-nowrap shrink-0 transition-colors">
+            <i class="ph-bold ph-sliders-horizontal text-sm"></i>
+            <span>3. Hotéis & Experiências</span>
+          </button>
+          <button onclick="scrollToSection('documentos')" class="text-surface-800 hover:text-brand-700 pb-1 flex items-center space-x-1.5 whitespace-nowrap shrink-0 transition-colors">
+            <i class="ph-bold ph-folder-notch-open text-sm"></i>
+            <span>4. Vouchers & Documentos</span>
+          </button>
+          <button onclick="scrollToSection('concierge-ia')" class="text-surface-800 hover:text-brand-700 pb-1 flex items-center space-x-1.5 whitespace-nowrap shrink-0 transition-colors">
+            <i class="ph-bold ph-robot text-sm"></i>
+            <span>5. Concierge IA & Contato</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+
+
+    <!-- Conteúdo Principal do Viajante -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        
+        <!-- Coluna Esquerda: Conteúdo Rico (8 Colunas) -->
+        <div class="lg:col-span-8 space-y-16">
+
+          <!-- SEÇÃO 1: ITINERÁRIO COM SLIDESHOW AUTOMÁTICO DE FOTOS -->
+          <section id="itinerario" class="space-y-8">
+            <div class="border-b border-surface-200 pb-4 flex items-end justify-between">
+              <div>
+                <span class="text-xs font-bold tracking-widest text-brand-700 uppercase">Cronograma Operacional</span>
+                <h2 class="font-display text-3xl font-extrabold text-surface-900 mt-1">O Passo a Passo da sua Jornada</h2>
+              </div>
+              <span class="text-xs text-brand-800 bg-brand-50 border border-brand-200 px-3 py-1 rounded-full font-bold">10 Dias / 9 Noites</span>
+            </div>
+
+            <!-- Card Dia 1: COM SLIDESHOW DINÂMICO DE FOTOS (NOVIDADE) -->
+            <div class="bg-white rounded-2xl border border-surface-200 p-6 sm:p-8 shadow-sm hover-lift transition-all" id="day1-card-container">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-3">
+                  <span class="w-10 h-10 rounded-xl bg-brand-700 text-white flex items-center justify-center font-extrabold text-sm font-display shadow-md">D01</span>
+                  <div>
+                    <h3 class="font-display text-xl font-bold text-surface-900">Chegada em Roma & Acomodação Palaciana</h3>
+                    <p class="text-xs text-surface-800">Transfer VIP • Hotel 5★ Splendide Royal • Pôr do Sol & Gastronomia Michelin</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 text-[11px] font-bold bg-brand-100 text-brand-900 rounded-md border border-brand-300">Check-in Palaciano</span>
+              </div>
+
+              <!-- SLIDESHOW INTERATIVO DIA 1 -->
+              <div class="space-y-3 mb-6">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-brand-800 uppercase tracking-wider flex items-center space-x-1.5">
+                    <i class="ph-bold ph-slideshow text-brand-600 text-base"></i>
+                    <span>Momentos da Chegada (<span id="carousel-current-index-d1">1</span> de 4)</span>
+                    <span class="text-[10px] bg-brand-50 text-brand-700 px-2 py-0.5 rounded-full font-semibold border border-brand-200">Auto-Play 4s</span>
+                  </span>
+                  <!-- Botões de Navegação -->
+                  <div class="flex items-center space-x-2">
+                    <button onclick="prevDaySlide(1)" class="w-8 h-8 rounded-lg bg-surface-100 hover:bg-brand-600 hover:text-white text-surface-800 flex items-center justify-center transition-colors">
+                      <i class="ph-bold ph-caret-left"></i>
+                    </button>
+                    <button onclick="nextDaySlide(1)" class="w-8 h-8 rounded-lg bg-surface-100 hover:bg-brand-600 hover:text-white text-surface-800 flex items-center justify-center transition-colors">
+                      <i class="ph-bold ph-caret-right"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Slide Principal Dia 1 com Transição Suave -->
+                <div class="relative h-72 sm:h-80 rounded-2xl overflow-hidden border border-surface-200 group">
+                  <img id="carousel-img-d1" src="https://images.unsplash.com/photo-1549144511-f099e773c147?auto=format&fit=crop&w=1200&q=80" alt="Chegada em Roma" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105">
+                  <div class="absolute inset-0 bg-gradient-to-t from-surface-950/90 via-surface-950/20 to-transparent flex items-end p-6">
+                    <div class="text-white space-y-1.5">
+                      <span id="carousel-tag-d1" class="text-[10px] font-bold uppercase tracking-wider bg-brand-600 px-2.5 py-0.5 rounded-full inline-block shadow-sm">
+                        Momento 1: Boas-Vindas no Aeroporto FCO
+                      </span>
+                      <h4 id="carousel-title-d1" class="font-display text-xl font-bold">
+                        Transfer Executivo Privativo em Mercedes Classe E
+                      </h4>
+                      <p id="carousel-desc-d1" class="text-xs text-zinc-200 max-w-xl leading-relaxed">
+                        Recepção VIP na área de desembarque com motorista executivo bilíngue, água San Pellegrino fresca e translado sem esperas até o hotel palaciano.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Miniaturas Clicáveis Dia 1 -->
+                <div class="grid grid-cols-4 gap-2">
+                  <button onclick="setDaySlide(1, 0)" id="thumb-d1-0" class="h-16 rounded-xl overflow-hidden border-2 border-brand-600 focus:outline-none relative hover:scale-105 transition-all">
+                    <img src="https://images.unsplash.com/photo-1549144511-f099e773c147?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 left-1 text-[9px] bg-black/70 text-white px-1.5 rounded font-bold">1. Transfer</span>
+                  </button>
+                  <button onclick="setDaySlide(1, 1)" id="thumb-d1-1" class="h-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-400 focus:outline-none relative hover:scale-105 transition-all">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 left-1 text-[9px] bg-black/70 text-white px-1.5 rounded font-bold">2. Suíte 5★</span>
+                  </button>
+                  <button onclick="setDaySlide(1, 2)" id="thumb-d1-2" class="h-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-400 focus:outline-none relative hover:scale-105 transition-all">
+                    <img src="https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 left-1 text-[9px] bg-black/70 text-white px-1.5 rounded font-bold">3. Pôr do Sol</span>
+                  </button>
+                  <button onclick="setDaySlide(1, 3)" id="thumb-d1-3" class="h-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-400 focus:outline-none relative hover:scale-105 transition-all">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 left-1 text-[9px] bg-black/70 text-white px-1.5 rounded font-bold">4. Mirabelle</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Detalhes de Logística e Boas-Vindas -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-surface-50 p-4 rounded-xl border border-surface-200 text-xs">
+                <div>
+                  <strong class="text-surface-900 block mb-1 font-bold">Logística do Desembarque:</strong>
+                  <p class="text-surface-800">Motorista particular aguardando com identificação no Terminal 3 com carro climatizado até o hotel.</p>
+                </div>
+                <div>
+                  <strong class="text-surface-900 block mb-1 font-bold">Noite Gastronômica:</strong>
+                  <p class="text-surface-800">Mesa reservada às 19:30 no Rooftop Mirabelle com vista frontal para a cúpula do Vaticano.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Dia 2: COM SLIDESHOW DINÂMICO AUTOMÁTICO DE FOTOS -->
+            <div class="bg-white rounded-2xl border border-surface-200 p-6 sm:p-8 shadow-sm hover-lift transition-all" id="day2-card-container">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-3">
+                  <span class="w-10 h-10 rounded-xl bg-brand-700 text-white flex items-center justify-center font-extrabold text-sm font-display shadow-md">D02</span>
+                  <div>
+                    <h3 class="font-display text-xl font-bold text-surface-900">Coliseu Subterrâneo, Fórum & Trastevere com Historiadora</h3>
+                    <p class="text-xs text-surface-800">Passeio de 4 paradas culturais • Acesso VIP sem filas • Guia em Português</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 text-[11px] font-bold bg-brand-100 text-brand-900 rounded-md border border-brand-300">Ingressos VIP Inclusos</span>
+              </div>
+
+              <!-- SLIDESHOW INTERATIVO AUTOMÁTICO COM PROGRESSO -->
+              <div class="space-y-3 mb-6">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-brand-800 uppercase tracking-wider flex items-center space-x-1.5">
+                    <i class="ph-bold ph-slideshow text-brand-600 text-base"></i>
+                    <span>Slideshow das Paradas (<span id="carousel-current-index-d2">1</span> de 4)</span>
+                    <span class="text-[10px] bg-brand-50 text-brand-700 px-2 py-0.5 rounded-full font-semibold border border-brand-200">Auto-Play 4s</span>
+                  </span>
+                  <!-- Botões de Navegação -->
+                  <div class="flex items-center space-x-2">
+                    <button onclick="prevDaySlide(2)" class="w-8 h-8 rounded-lg bg-surface-100 hover:bg-brand-600 hover:text-white text-surface-800 flex items-center justify-center transition-colors">
+                      <i class="ph-bold ph-caret-left"></i>
+                    </button>
+                    <button onclick="nextDaySlide(2)" class="w-8 h-8 rounded-lg bg-surface-100 hover:bg-brand-600 hover:text-white text-surface-800 flex items-center justify-center transition-colors">
+                      <i class="ph-bold ph-caret-right"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Slide Principal Dia 2 -->
+                <div class="relative h-72 sm:h-80 rounded-2xl overflow-hidden border border-surface-200 group">
+                  <img id="carousel-img-d2" src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80" alt="Parada do Passeio" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105">
+                  <div class="absolute inset-0 bg-gradient-to-t from-surface-950/90 via-surface-950/20 to-transparent flex items-end p-6">
+                    <div class="text-white space-y-1.5">
+                      <span id="carousel-tag-d2" class="text-[10px] font-bold uppercase tracking-wider bg-brand-600 px-2.5 py-0.5 rounded-full inline-block shadow-sm">
+                        Parada 1: Subterrâneo do Coliseu
+                      </span>
+                      <h4 id="carousel-title-d2" class="font-display text-xl font-bold">
+                        Área Restrita dos Gladiadores & Hipogeu
+                      </h4>
+                      <p id="carousel-desc-d2" class="text-xs text-zinc-200 max-w-xl leading-relaxed">
+                        Acesso exclusivo aos corredores subterrâneos onde feras e gladiadores aguardavam para subir na arena através de elevadores mecânicos antigos.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Miniaturas clicáveis Dia 2 -->
+                <div class="grid grid-cols-4 gap-2">
+                  <button onclick="setDaySlide(2, 0)" id="thumb-d2-0" class="h-16 rounded-xl overflow-hidden border-2 border-brand-600 focus:outline-none relative hover:scale-105 transition-all">
+                    <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 left-1 text-[9px] bg-black/70 text-white px-1.5 rounded font-bold">1. Subsolo</span>
+                  </button>
+                  <button onclick="setDaySlide(2, 1)" id="thumb-d2-1" class="h-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-400 focus:outline-none relative hover:scale-105 transition-all">
+                    <img src="https://images.unsplash.com/photo-1555992828-ca4dbe41d294?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 left-1 text-[9px] bg-black/70 text-white px-1.5 rounded font-bold">2. Arena</span>
+                  </button>
+                  <button onclick="setDaySlide(2, 2)" id="thumb-d2-2" class="h-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-400 focus:outline-none relative hover:scale-105 transition-all">
+                    <img src="https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 left-1 text-[9px] bg-black/70 text-white px-1.5 rounded font-bold">3. Fórum</span>
+                  </button>
+                  <button onclick="setDaySlide(2, 3)" id="thumb-d2-3" class="h-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-400 focus:outline-none relative hover:scale-105 transition-all">
+                    <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 left-1 text-[9px] bg-black/70 text-white px-1.5 rounded font-bold">4. Gelateria</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Detalhes do Guia e Paradas -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-surface-50 p-4 rounded-xl border border-surface-200 text-xs">
+                <div>
+                  <strong class="text-surface-900 block mb-1 font-bold">Guia Historiadora:</strong>
+                  <p class="text-surface-800">Dra. Chiara Rossi (Arqueóloga • Licença Oficial Vaticano & CADASTUR #9402).</p>
+                </div>
+                <div>
+                  <strong class="text-surface-900 block mb-1 font-bold">Paradas Confirmadas:</strong>
+                  <p class="text-surface-800">1. Subterrâneo Coliseu ➔ 2. Arena ➔ 3. Fórum Romano ➔ 4. Pausa técnica Gelateria Giolitti.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Dia 3: COM SLIDESHOW DINÂMICO DE FOTOS (NOVIDADE) -->
+            <div class="bg-white rounded-2xl border border-surface-200 p-6 sm:p-8 shadow-sm hover-lift transition-all" id="day3-card-container">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-3">
+                  <span class="w-10 h-10 rounded-xl bg-brand-700 text-white flex items-center justify-center font-extrabold text-sm font-display shadow-md">D03</span>
+                  <div>
+                    <h3 class="font-display text-xl font-bold text-surface-900">Navegação Privativa por Capri, Falésias & Positano</h3>
+                    <p class="text-xs text-surface-800">Barco Riva 38 exclusivo • Aperitivo Prosecco a bordo • Banho nas Grutas & Almoço Costeiro</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 text-[11px] font-bold bg-brand-100 text-brand-900 rounded-md border border-brand-300">Charter Náutico Privativo</span>
+              </div>
+
+              <!-- SLIDESHOW INTERATIVO DIA 3 -->
+              <div class="space-y-3 mb-6">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-brand-800 uppercase tracking-wider flex items-center space-x-1.5">
+                    <i class="ph-bold ph-slideshow text-brand-600 text-base"></i>
+                    <span>Roteiro Náutico (<span id="carousel-current-index-d3">1</span> de 4)</span>
+                    <span class="text-[10px] bg-brand-50 text-brand-700 px-2 py-0.5 rounded-full font-semibold border border-brand-200">Auto-Play 4s</span>
+                  </span>
+                  <!-- Botões de Navegação -->
+                  <div class="flex items-center space-x-2">
+                    <button onclick="prevDaySlide(3)" class="w-8 h-8 rounded-lg bg-surface-100 hover:bg-brand-600 hover:text-white text-surface-800 flex items-center justify-center transition-colors">
+                      <i class="ph-bold ph-caret-left"></i>
+                    </button>
+                    <button onclick="nextDaySlide(3)" class="w-8 h-8 rounded-lg bg-surface-100 hover:bg-brand-600 hover:text-white text-surface-800 flex items-center justify-center transition-colors">
+                      <i class="ph-bold ph-caret-right"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Slide Principal Dia 3 -->
+                <div class="relative h-72 sm:h-80 rounded-2xl overflow-hidden border border-surface-200 group">
+                  <img id="carousel-img-d3" src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=80" alt="Capri e Costa Amalfitana" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105">
+                  <div class="absolute inset-0 bg-gradient-to-t from-surface-950/90 via-surface-950/20 to-transparent flex items-end p-6">
+                    <div class="text-white space-y-1.5">
+                      <span id="carousel-tag-d3" class="text-[10px] font-bold uppercase tracking-wider bg-brand-600 px-2.5 py-0.5 rounded-full inline-block shadow-sm">
+                        Parada 1: Marina Grande de Capri
+                      </span>
+                      <h4 id="carousel-title-d3" class="font-display text-xl font-bold">
+                        Embarque Privativo em Lancha Riva 38 Exclusiva
+                      </h4>
+                      <p id="carousel-desc-d3" class="text-xs text-zinc-200 max-w-xl leading-relaxed">
+                        Skipper local nativo da ilha, toalhas de praia aveludadas, solário com espreguiçadeiras e seleção de frutas frescas mediterrâneas a bordo.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Miniaturas Clicáveis Dia 3 -->
+                <div class="grid grid-cols-4 gap-2">
+                  <button onclick="setDaySlide(3, 0)" id="thumb-d3-0" class="h-16 rounded-xl overflow-hidden border-2 border-brand-600 focus:outline-none relative hover:scale-105 transition-all">
+                    <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 left-1 text-[9px] bg-black/70 text-white px-1.5 rounded font-bold">1. Lancha Riva</span>
+                  </button>
+                  <button onclick="setDaySlide(3, 1)" id="thumb-d3-1" class="h-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-400 focus:outline-none relative hover:scale-105 transition-all">
+                    <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 left-1 text-[9px] bg-black/70 text-white px-1.5 rounded font-bold">2. Faraglioni</span>
+                  </button>
+                  <button onclick="setDaySlide(3, 2)" id="thumb-d3-2" class="h-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-400 focus:outline-none relative hover:scale-105 transition-all">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 left-1 text-[9px] bg-black/70 text-white px-1.5 rounded font-bold">3. Grutas & Mar</span>
+                  </button>
+                  <button onclick="setDaySlide(3, 3)" id="thumb-d3-3" class="h-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-400 focus:outline-none relative hover:scale-105 transition-all">
+                    <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 left-1 text-[9px] bg-black/70 text-white px-1.5 rounded font-bold">4. Positano</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Detalhes Náuticos -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-surface-50 p-4 rounded-xl border border-surface-200 text-xs">
+                <div>
+                  <strong class="text-surface-900 block mb-1 font-bold">Serviço de Bordo Incluso:</strong>
+                  <p class="text-surface-800">Garrafa de Prosecco DOCG, toalhas bordadas, máscaras de snorkel e paradas para mergulho livre.</p>
+                </div>
+                <div>
+                  <strong class="text-surface-900 block mb-1 font-bold">Roteiro da Navegação:</strong>
+                  <p class="text-surface-800">Marina Grande ➔ Faraglioni (Arco do Amor) ➔ Gruta Branca & Verde ➔ Desembarque em Positano.</p>
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- SEÇÃO 2: GUIA 360° DO DESTINO (CULINÁRIA, CLIMA, CULTURA & MOBILIDADE) -->
+          <section id="guia-360" class="space-y-8">
+            <div class="border-b border-surface-200 pb-4">
+              <span class="text-xs font-bold tracking-widest text-brand-700 uppercase">Imersão sem Dúvidas</span>
+              <h2 class="font-display text-3xl font-extrabold text-surface-900 mt-1">Guia 360° do Destino</h2>
+              <p class="text-xs text-surface-800 mt-1">Todas as informações práticas, culturais e gastronômicas compiladas para a sua viagem ser perfeita.</p>
+            </div>
+
+            <!-- Grid 4 Quadrantes: Culinária, Clima, Cultura, Mobilidade -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- Quadrante 1: Culinária & Onde Comer -->
+              <div class="bg-white rounded-2xl border border-surface-200 p-6 shadow-sm space-y-4 hover-lift transition-all">
+                <div class="flex items-center space-x-3 text-surface-900">
+                  <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center text-xl">
+                    <i class="ph-bold ph-fork-knife"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-display font-bold text-base">Culinária Local & Onde Comer</h4>
+                    <span class="text-[11px] text-surface-800">Curadoria gastronômica de Roma e Costa Amalfitana</span>
+                  </div>
+                </div>
+                
+                <ul class="space-y-3 text-xs text-surface-800">
+                  <li class="p-3 bg-surface-50 rounded-xl border border-surface-200">
+                    <strong class="text-surface-900 block font-bold mb-0.5">🍝 O autêntico Cacio e Pepe & Carbonara:</strong>
+                    Recomendamos o bairro de Trastevere no tradicional <em>Da Enzo al 29</em> ou <em>Roscioli Salumeria</em>. 
+                    <span class="text-brand-700 font-bold block mt-1">Dica da agência: Reservamos sua mesa com antecedência para evitar filas de 2 horas.</span>
+                  </li>
+                  <li class="p-3 bg-surface-50 rounded-xl border border-surface-200">
+                    <strong class="text-surface-900 block font-bold mb-0.5">🍋 Na Costa Amalfitana:</strong>
+                    Não deixe de provar o <em>Scialatielli ai Frutti di Mare</em> e a autêntica <em>Delizia al Limone</em> feita com os limões de Sorrento.
+                  </li>
+                  <li class="text-[11px] text-surface-800 italic">
+                    *Média de custo por refeição casual: €25 a €45 por pessoa. Alta gastronomia: €90 a €160.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Quadrante 2: Clima, Mala & O que Vestir -->
+              <div class="bg-white rounded-2xl border border-surface-200 p-6 shadow-sm space-y-4 hover-lift transition-all">
+                <div class="flex items-center space-x-3 text-surface-900">
+                  <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center text-xl">
+                    <i class="ph-bold ph-cloud-sun"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-display font-bold text-base">Clima & Guia de Mala</h4>
+                    <span class="text-[11px] text-surface-800">Previsão e vestimentas adequadas para a estação</span>
+                  </div>
+                </div>
+                
+                <ul class="space-y-3 text-xs text-surface-800">
+                  <li class="p-3 bg-surface-50 rounded-xl border border-surface-200">
+                    <strong class="text-surface-900 block font-bold mb-0.5">☀️ Temperatura Média: 16°C a 24°C</strong>
+                    Clima primaveril ensolarado durante o dia com brisa fresca à noite nas cidades costeiras.
+                  </li>
+                  <li class="p-3 bg-surface-50 rounded-xl border border-surface-200">
+                    <strong class="text-surface-900 block font-bold mb-0.5">👗 Código de Vestimenta nas Igrejas:</strong>
+                    Vaticano, Basílica de São Pedro e Santa Maria del Fiore exigem ombros e joelhos cobertos. Leve uma echarpe leve na bolsa.
+                  </li>
+                  <li class="p-3 bg-surface-50 rounded-xl border border-surface-200">
+                    <strong class="text-surface-900 block font-bold mb-0.5">👟 Calçados para Roma:</strong>
+                    As ruas possuem calçamento antigo ("Sanpietrini"). Evite saltos finos; prefira tênis casuais de couro confortáveis.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Quadrante 3: Cultura, Moeda & Etiquetas -->
+              <div class="bg-white rounded-2xl border border-surface-200 p-6 shadow-sm space-y-4 hover-lift transition-all">
+                <div class="flex items-center space-x-3 text-surface-900">
+                  <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl">
+                    <i class="ph-bold ph-coins"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-display font-bold text-base">Cultura, Moeda & Costumes</h4>
+                    <span class="text-[11px] text-surface-800">Como se comportar e pagar no dia a dia</span>
+                  </div>
+                </div>
+                
+                <ul class="space-y-3 text-xs text-surface-800">
+                  <li class="p-3 bg-surface-50 rounded-xl border border-surface-200">
+                    <strong class="text-surface-900 block font-bold mb-0.5">💶 Pagamentos & Moeda (Euro €):</strong>
+                    Cartões globais (Nomad e Wise) são aceitos em 98% dos estabelecimentos. Recomendamos levar apenas €150 em espécie para gorjetas e pequenas feiras.
+                  </li>
+                  <li class="p-3 bg-surface-50 rounded-xl border border-surface-200">
+                    <strong class="text-surface-900 block font-bold mb-0.5">🔌 Tomadas & Voltagem:</strong>
+                    Padrão Tipo C e L (230V). O plug de 2 pinos redondos brasileiro encaixa perfeitamente na maioria das tomadas.
+                  </li>
+                  <li class="p-3 bg-surface-50 rounded-xl border border-surface-200">
+                    <strong class="text-surface-900 block font-bold mb-0.5">☕ O ritual do café italiano:</strong>
+                    Cappuccino é consumido apenas pela manhã até as 11h. Após o almoço, os italianos pedem apenas Espresso ("Caffè normale").
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Quadrante 4: Mobilidade & Deslocamentos -->
+              <div class="bg-white rounded-2xl border border-surface-200 p-6 shadow-sm space-y-4 hover-lift transition-all">
+                <div class="flex items-center space-x-3 text-surface-900">
+                  <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-800 flex items-center justify-center text-xl">
+                    <i class="ph-bold ph-car-profile"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-display font-bold text-base">Deslocamentos & Logística</h4>
+                    <span class="text-[11px] text-surface-800">Como se locomover sem estresse</span>
+                  </div>
+                </div>
+                
+                <ul class="space-y-3 text-xs text-surface-800">
+                  <li class="p-3 bg-surface-50 rounded-xl border border-surface-200">
+                    <strong class="text-surface-900 block font-bold mb-0.5">🚄 Trem de Alta Velocidade (Frecciarossa):</strong>
+                    Seu trecho Roma ➔ Florença leva apenas 1h32m a 300 km/h. Seus assentos na Classe Executiva já estão reservados com direito a café de boas-vindas.
+                  </li>
+                  <li class="p-3 bg-surface-50 rounded-xl border border-surface-200">
+                    <strong class="text-surface-900 block font-bold mb-0.5">🚕 Táxi vs Uber em Roma:</strong>
+                    O Uber comum na Itália opera como Uber Black (NCC). Para corridas curtas no centro histórico, o aplicativo local <em>FreeNow</em> ou os táxis brancos oficiais nos pontos são mais rápidos.
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- SEÇÃO 3: PERSONALIZAÇÃO, HOTÉIS COM FOTOS & MAPA INTERATIVO -->
+          <section id="personalizacao" class="space-y-6">
+            <div class="border-b border-surface-200 pb-4">
+              <span class="text-xs font-bold tracking-widest text-brand-700 uppercase">Escolha Interativa com Mapa</span>
+              <h2 class="font-display text-3xl font-extrabold text-surface-900 mt-1">Personalize seus Hotéis & Veja a Localização</h2>
+              <p class="text-xs text-surface-800 mt-1">Escolha a categoria de hotel preferida com fotos reais, comodidades e visualização no mapa. O valor recalcula na hora!</p>
+            </div>
+
+            <!-- Seletor de Categoria de Hotel com Fotos e Mapa -->
+            <div class="bg-white rounded-2xl border border-surface-200 p-6 shadow-sm space-y-6">
+              <div class="flex items-center justify-between">
+                <h4 class="font-display font-bold text-lg text-surface-900">
+                  Hospedagem em Roma: Compare as Opções
+                </h4>
+                <span class="text-xs font-bold text-brand-700 bg-brand-50 border border-brand-200 px-3 py-1 rounded-full flex items-center">
+                  <i class="ph-bold ph-lightning mr-1 text-brand-600"></i> Recálculo em Tempo Real
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                
+                <!-- Opção A: Hotel Base 5★ -->
+                <div id="hotel-opt-a" onclick="selectHotelOption('A', 0)" class="border-2 border-brand-600 bg-brand-50/30 rounded-2xl p-5 cursor-pointer transition-all relative space-y-3 hover-lift">
+                  <div class="h-44 rounded-xl overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" alt="Hotel Splendide" class="w-full h-full object-cover">
+                    <div class="absolute top-2 left-2 bg-brand-900 text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
+                      Opção Atual (Inclusa)
+                    </div>
+                    <div class="absolute top-2 right-2 text-white bg-black/60 backdrop-blur-md text-xs px-2 py-0.5 rounded">
+                      ★ 5 Estrelas
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 class="font-display font-bold text-base text-surface-900">Hotel Splendide Royal Roma 5★</h5>
+                    <p class="text-xs text-surface-800 mt-1">Ao lado da Villa Borghese e da famosa Via Veneto. Terraço panorâmico.</p>
+                  </div>
+
+                  <!-- Botão de Ver no Mapa -->
+                  <div class="pt-2 flex items-center justify-between border-t border-surface-200">
+                    <button onclick="openMapModal('Hotel Splendide Royal Roma', 'Via di Porta Pinciana, 14, Roma', 'A 450m da Piazza di Spagna')" class="text-xs font-bold text-brand-700 hover:text-brand-900 flex items-center space-x-1 hover:underline">
+                      <i class="ph-bold ph-map-pin text-sm"></i>
+                      <span>Ver no Mapa & Atrações</span>
+                    </button>
+                    <strong class="text-xs font-bold text-surface-900">Incluso no Pacote</strong>
+                  </div>
+                </div>
+
+                <!-- Opção B: Hotel Upgrade 5★L (Hotel de Russie) -->
+                <div id="hotel-opt-b" onclick="selectHotelOption('B', 3800)" class="border-2 border-surface-200 hover:border-brand-400 bg-white rounded-2xl p-5 cursor-pointer transition-all relative space-y-3 hover-lift">
+                  <div class="h-44 rounded-xl overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80" alt="Hotel de Russie" class="w-full h-full object-cover">
+                    <div class="absolute top-2 left-2 bg-emerald-700 text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
+                      Upgrade Recomendado
+                    </div>
+                    <div class="absolute top-2 right-2 text-white bg-black/60 backdrop-blur-md text-xs px-2 py-0.5 rounded">
+                      ★ 5 Estrelas Luxo
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 class="font-display font-bold text-base text-surface-900">Hotel de Russie (Rocco Forte) 5★ L</h5>
+                    <p class="text-xs text-surface-800 mt-1">Palácio histórico com Jardins Secretos privativos na Piazza del Popolo.</p>
+                  </div>
+
+                  <!-- Botão de Ver no Mapa -->
+                  <div class="pt-2 flex items-center justify-between border-t border-surface-200">
+                    <button onclick="openMapModal('Hotel de Russie Rocco Forte', 'Via del Babuino, 9, Roma', 'A 150m da Piazza del Popolo')" class="text-xs font-bold text-brand-700 hover:text-brand-900 flex items-center space-x-1 hover:underline">
+                      <i class="ph-bold ph-map-pin text-sm"></i>
+                      <span>Ver no Mapa & Atrações</span>
+                    </button>
+                    <strong class="text-xs font-bold text-brand-700">+ R$ 380/mês (10x)</strong>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Adicionais e Experiências Opcionais -->
+            <div class="bg-white rounded-2xl border border-surface-200 p-6 shadow-sm space-y-4">
+              <h4 class="font-display font-bold text-lg text-surface-900">Experiências Exclusivas (Opcionais)</h4>
+
+              <div class="space-y-3">
+                <label class="flex items-center justify-between p-4 rounded-xl border border-surface-200 hover:bg-brand-50/40 cursor-pointer transition-colors hover-lift">
+                  <div class="flex items-center space-x-3">
+                    <input type="checkbox" id="add-chianti" onchange="toggleAddon('chianti', 1450, this.checked)" class="w-5 h-5 rounded border-surface-400 text-brand-600 focus:ring-brand-500">
+                    <div>
+                      <strong class="text-xs font-bold text-surface-900 block">Degustação Privativa de Vinhos Supertoscanos em Chianti</strong>
+                      <span class="text-[11px] text-surface-800">Visita à vinícola do Século XV com almoço harmonizado de 5 tempos para o casal.</span>
+                    </div>
+                  </div>
+                  <span class="text-xs font-bold text-surface-900 whitespace-nowrap ml-4">+ R$ 1.450</span>
+                </label>
+
+                <label class="flex items-center justify-between p-4 rounded-xl border border-surface-200 hover:bg-brand-50/40 cursor-pointer transition-colors hover-lift">
+                  <div class="flex items-center space-x-3">
+                    <input type="checkbox" id="add-helicopter" onchange="toggleAddon('helicopter', 3200, this.checked)" class="w-5 h-5 rounded border-surface-400 text-brand-600 focus:ring-brand-500">
+                    <div>
+                      <strong class="text-xs font-bold text-surface-900 block">Voo Panorâmico de Helicóptero sobre a Costa Amalfitana e Capri</strong>
+                      <span class="text-[11px] text-surface-800">30 minutos sobrevoando Ravello, Positano e os Faraglioni com fotos aéreas exclusivas.</span>
+                    </div>
+                  </div>
+                  <span class="text-xs font-bold text-surface-900 whitespace-nowrap ml-4">+ R$ 3.200</span>
+                </label>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- SEÇÃO 4: COFRE DE VOUCHERS & DOCUMENTOS OFFLINE -->
+          <section id="documentos" class="space-y-6">
+            <div class="border-b border-surface-200 pb-4 flex items-end justify-between">
+              <div>
+                <span class="text-xs font-bold tracking-widest text-brand-700 uppercase">Cofre de Bordo Digital</span>
+                <h2 class="font-display text-3xl font-extrabold text-surface-900 mt-1">Vouchers & Documentos Oficiais</h2>
+              </div>
+              <span class="text-xs text-brand-800 bg-brand-50 border border-brand-200 px-3 py-1 rounded-full font-bold flex items-center space-x-1">
+                <i class="ph-bold ph-wifi-slash"></i>
+                <span>Disponível 100% Offline no PWA</span>
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="bg-white rounded-xl border border-surface-200 p-4 flex items-center justify-between shadow-sm hover-lift transition-all">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-lg bg-brand-50 text-brand-800 flex items-center justify-center text-xl">
+                    <i class="ph-bold ph-airplane-takeoff"></i>
+                  </div>
+                  <div>
+                    <h6 class="text-xs font-bold text-surface-900">E-Tickets & Passagens Aéreas</h6>
+                    <span class="text-[11px] text-surface-800">ITA Airways • Localizador: XJ992K</span>
+                  </div>
+                </div>
+                <button onclick="simulateDownload('Passagens_Aereas_Executiva.pdf')" class="p-2 text-surface-800 hover:text-brand-700 hover:bg-surface-100 rounded-lg text-lg transition-colors">
+                  <i class="ph-bold ph-download-simple"></i>
+                </button>
+              </div>
+
+              <div class="bg-white rounded-xl border border-surface-200 p-4 flex items-center justify-between shadow-sm hover-lift transition-all">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-lg bg-brand-50 text-brand-800 flex items-center justify-center text-xl">
+                    <i class="ph-bold ph-shield-check"></i>
+                  </div>
+                  <div>
+                    <h6 class="text-xs font-bold text-surface-900">Apólice de Seguro Saúde Internacional</h6>
+                    <span class="text-[11px] text-surface-800">Cobertura €60.000 (Tratado Schengen)</span>
+                  </div>
+                </div>
+                <button onclick="simulateDownload('Seguro_Viagem_Internacional.pdf')" class="p-2 text-surface-800 hover:text-brand-700 hover:bg-surface-100 rounded-lg text-lg transition-colors">
+                  <i class="ph-bold ph-download-simple"></i>
+                </button>
+              </div>
+
+              <div class="bg-white rounded-xl border border-surface-200 p-4 flex items-center justify-between shadow-sm hover-lift transition-all">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-lg bg-brand-50 text-brand-800 flex items-center justify-center text-xl">
+                    <i class="ph-bold ph-bed"></i>
+                  </div>
+                  <div>
+                    <h6 class="text-xs font-bold text-surface-900">Vouchers de Hospedagem</h6>
+                    <span class="text-[11px] text-surface-800">Roma (3N) • Florença (3N) • Positano (3N)</span>
+                  </div>
+                </div>
+                <button onclick="simulateDownload('Vouchers_Hospedagem.pdf')" class="p-2 text-surface-800 hover:text-brand-700 hover:bg-surface-100 rounded-lg text-lg transition-colors">
+                  <i class="ph-bold ph-download-simple"></i>
+                </button>
+              </div>
+
+              <div class="bg-white rounded-xl border border-surface-200 p-4 flex items-center justify-between shadow-sm hover-lift transition-all">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-lg bg-brand-50 text-brand-800 flex items-center justify-center text-xl">
+                    <i class="ph-bold ph-identification-card"></i>
+                  </div>
+                  <div>
+                    <h6 class="text-xs font-bold text-surface-900">Contatos de Emergência 24h</h6>
+                    <span class="text-[11px] text-surface-800">Plantão da Agência no Brasil & Receptivo Local</span>
+                  </div>
+                </div>
+                <button onclick="simulateDownload('Guia_Emergencia_24h.pdf')" class="p-2 text-surface-800 hover:text-brand-700 hover:bg-surface-100 rounded-lg text-lg transition-colors">
+                  <i class="ph-bold ph-download-simple"></i>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- SEÇÃO 5: RÉGUA DE COMUNICAÇÕES & CONCIERGE IA -->
+          <section id="concierge-ia" class="bg-surface-900 text-white rounded-3xl p-8 shadow-xl space-y-6 border border-surface-800">
+            <div class="flex items-center justify-between border-b border-surface-800 pb-4">
+              <div>
+                <span class="text-xs font-bold tracking-widest text-brand-300 uppercase">Seu Guardião de Bordo</span>
+                <h3 class="font-display text-2xl font-bold mt-1">Concierge Inteligente & Régua de Alertas</h3>
+              </div>
+              <div class="w-10 h-10 rounded-full bg-brand-700 text-brand-200 flex items-center justify-center text-xl">
+                <i class="ph-fill ph-chat-circle-dots"></i>
+              </div>
+            </div>
+
+            <p class="text-xs text-zinc-300 leading-relaxed">
+              Você não precisa se preocupar com datas e burocracias. Nossa plataforma monitora seus voos e envia lembretes estratégicos no WhatsApp dos viajantes:
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+              <div class="bg-surface-800/80 border border-surface-700 rounded-xl p-4 space-y-2 hover-lift">
+                <div class="text-brand-300 font-bold flex items-center space-x-1.5">
+                  <i class="ph-bold ph-calendar-check"></i>
+                  <span>Alerta D-7 (Mala & Docs)</span>
+                </div>
+                <p class="text-zinc-400 text-[11px]">Enviaremos o checklist interativo de bagagem e conferência de validade dos passaportes.</p>
+              </div>
+
+              <div class="bg-surface-800/80 border border-surface-700 rounded-xl p-4 space-y-2 hover-lift">
+                <div class="text-brand-300 font-bold flex items-center space-x-1.5">
+                  <i class="ph-bold ph-ticket"></i>
+                  <span>Alerta D-48h (Check-in)</span>
+                </div>
+                <p class="text-zinc-400 text-[11px]">Aviso com link de marcação de assentos aéreos e envio dos dados e foto do motorista do transfer.</p>
+              </div>
+
+              <div class="bg-surface-800/80 border border-surface-700 rounded-xl p-4 space-y-2 hover-lift">
+                <div class="text-brand-300 font-bold flex items-center space-x-1.5">
+                  <i class="ph-bold ph-broadcast"></i>
+                  <span>Monitoramento de Portão</span>
+                </div>
+                <p class="text-zinc-400 text-[11px]">Caso haja alteração de terminal ou atraso, a central da agência emite alerta imediato no WhatsApp.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- SEÇÃO 6: PROVA SOCIAL, GOOGLE REVIEWS & REDES SOCIAIS -->
+          <section class="bg-white rounded-3xl border border-surface-200 p-8 shadow-sm space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-surface-200 pb-4 gap-4">
+              <div>
+                <span class="text-xs font-bold tracking-widest text-brand-700 uppercase">Segurança & Autoridade</span>
+                <h3 class="font-display text-2xl font-bold text-surface-900 mt-0.5">Avaliações Verificadas & Contato Oficial</h3>
+              </div>
+              <div class="flex items-center space-x-2 bg-brand-50 px-3.5 py-1.5 rounded-full border border-brand-200">
+                <span class="text-amber-500 flex text-sm">★★★★★</span>
+                <strong class="text-xs font-bold text-brand-900">4.9 no Google</strong>
+                <span class="text-[11px] text-surface-800">(184 avaliações)</span>
+              </div>
+            </div>
+
+            <!-- Depoimentos Reais -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+              <div class="p-4 rounded-xl bg-surface-50 border border-surface-200 space-y-2 hover-lift">
+                <div class="flex items-center space-x-2">
+                  <span class="text-amber-500 text-xs">★★★★★</span>
+                  <strong class="text-surface-900 font-bold">"Roteiro impecável na Itália!"</strong>
+                </div>
+                <p class="text-surface-800 leading-relaxed">
+                  "A comodidade de ter os vouchers, os transfers e o contato dos guias tudo pelo celular fez nossa viagem de lua de mel ser sem nenhum estresse. A Fernanda cuidou de cada detalhe!"
+                </p>
+                <span class="text-[11px] text-brand-700 font-semibold block">— Rodrigo & Vanessa Siqueira (São Paulo/SP)</span>
+              </div>
+
+              <div class="p-4 rounded-xl bg-surface-50 border border-surface-200 space-y-2 hover-lift">
+                <div class="flex items-center space-x-2">
+                  <span class="text-amber-500 text-xs">★★★★★</span>
+                  <strong class="text-surface-900 font-bold">"Atendimento consultivo e ágil"</strong>
+                </div>
+                <p class="text-surface-800 leading-relaxed">
+                  "Poder compartilhar o link com meus filhos para eles escolherem os passeios antes de fechar foi o grande diferencial. Agência nota 1.000!"
+                </p>
+                <span class="text-[11px] text-brand-700 font-semibold block">— Dra. Beatriz Vasconcelos (Belo Horizonte/MG)</span>
+              </div>
+            </div>
+
+            <!-- Rodapé com Redes Sociais, CADASTUR & Links de Decisão -->
+            <div class="pt-6 border-t border-surface-200 flex flex-wrap items-center justify-between gap-4 text-xs">
+              <div class="flex items-center space-x-4">
+                <span class="font-bold text-surface-900">Siga a Vivant IA:</span>
+                <a href="#" class="flex items-center space-x-1.5 text-brand-700 hover:text-brand-900 font-semibold">
+                  <i class="ph-bold ph-instagram-logo text-base"></i>
+                  <span>@vivantia.travel</span>
+                </a>
+                <a href="#" class="flex items-center space-x-1.5 text-brand-700 hover:text-brand-900 font-semibold">
+                  <i class="ph-bold ph-google-logo text-base"></i>
+                  <span>Ver Avaliações Google</span>
+                </a>
+              </div>
+              <div class="text-[11px] text-surface-800 flex items-center space-x-2">
+                <span class="px-2 py-0.5 bg-brand-100 text-brand-900 font-bold rounded">CADASTUR Oficial</span>
+                <span>CNPJ: 32.411.092/0001-84</span>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Coluna Direita: Box de Conversão Fixa & Motor de Indicação (4 Colunas) -->
+        <div class="lg:col-span-4 relative">
+          
+          <div id="desktop-investment-card" class="bg-white rounded-3xl border border-brand-200 p-5 sm:p-8 shadow-xl static lg:sticky lg:top-28 space-y-6 desktop-sticky-card max-h-[calc(100vh-8.5rem)] overflow-y-auto custom-scrollbar">
+            
+            <div class="flex items-center justify-between border-b border-surface-200 pb-4">
+              <div>
+                <span class="text-[11px] font-bold text-surface-800 uppercase tracking-wider block">Investimento para o Casal</span>
+                <span class="text-xs text-brand-700 font-bold flex items-center space-x-1 mt-0.5">
+                  <i class="ph-bold ph-shield-check"></i>
+                  <span>Tarifas e Bloqueios Garantidos</span>
+                </span>
+              </div>
+              <span class="px-2.5 py-1 text-[10px] font-bold bg-brand-100 text-brand-800 rounded-md">Até 10x sem juros</span>
+            </div>
+
+            <!-- Preço Dinâmico -->
+            <div>
+              <div class="flex items-baseline space-x-2">
+                <span class="text-xs text-surface-800 font-semibold">10x de</span>
+                <span id="display-installments" class="font-display text-3xl sm:text-4xl font-extrabold text-surface-900 tracking-tight">R$ 2.480</span>
+                <span class="text-xs text-surface-800">/mês</span>
+              </div>
+              <div class="text-xs text-surface-800 mt-1 flex items-center justify-between">
+                <span>ou à vista no Pix com 5% off:</span>
+                <strong id="display-total-cash" class="text-brand-700 font-bold">R$ 23.560</strong>
+              </div>
+              <div class="text-[11px] text-surface-700 text-right mt-0.5">
+                Total parcelado: <span id="display-total-raw">R$ 24.800</span>
+              </div>
+            </div>
+
+            <!-- Resumo dos Serviços Inclusos -->
+            <div class="bg-surface-50 rounded-xl p-4 border border-surface-200 space-y-2 text-xs">
+              <span class="font-bold text-surface-900 block mb-1">Incluso nesta proposta:</span>
+              <div class="flex items-center space-x-2 text-surface-800">
+                <i class="ph-bold ph-check text-brand-600"></i>
+                <span>9 Noites em Hotéis 5★ Selecionados</span>
+              </div>
+              <div class="flex items-center space-x-2 text-surface-800">
+                <i class="ph-bold ph-check text-brand-600"></i>
+                <span>Transfers Executivos Privativos (Portão a Porta)</span>
+              </div>
+              <div class="flex items-center space-x-2 text-surface-800">
+                <i class="ph-bold ph-check text-brand-600"></i>
+                <span>Trens Alta Velocidade em Classe Executiva</span>
+              </div>
+              <div class="flex items-center space-x-2 text-surface-800">
+                <i class="ph-bold ph-check text-brand-600"></i>
+                <span>Guias Historiadoras Credenciadas em Português</span>
+              </div>
+              <div class="flex items-center space-x-2 text-surface-800">
+                <i class="ph-bold ph-check text-brand-600"></i>
+                <span>Seguro Saúde Tratado Schengen (€60.000)</span>
+              </div>
+            </div>
+
+            <!-- Botões de Ação com Efeito de Escala -->
+            <div class="space-y-3">
+              <button onclick="openApprovalModal()" class="w-full py-4 px-6 rounded-2xl bg-brand-700 hover:bg-brand-600 text-white font-bold text-sm transition-all shadow-lg shadow-brand-900/20 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center space-x-2 group">
+                <span>Aprovar e Reservar Viagem</span>
+                <i class="ph-bold ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+              </button>
+
+              <button onclick="openVipModal('Viajante VIP', 'traveler')" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 text-white font-extrabold text-xs transition-all shadow-md hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center space-x-2 shadow-red-950/20">
+                <i class="ph-fill ph-crown text-base text-rose-200"></i>
+                <span>Passaporte VIP com Link Clicável</span>
+              </button>
+
+              <button onclick="openInviteModal()" class="w-full py-3 px-6 rounded-2xl border-2 border-surface-300 hover:border-brand-500 hover:bg-brand-50 text-surface-900 font-bold text-xs transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center space-x-2">
+                <i class="ph-bold ph-users text-brand-700 text-sm"></i>
+                <span>Convidar Amigo</span>
+              </button>
+            </div>
+
+            <!-- Motor Viral de Indicação (MGM) -->
+            <div class="pt-4 border-t border-surface-200">
+              <div class="bg-gradient-to-br from-brand-50 to-emerald-100/50 rounded-2xl p-4 border border-brand-300 text-xs space-y-2">
+                <div class="flex items-center space-x-2 text-brand-800 font-bold">
+                  <i class="ph-fill ph-gift text-base text-brand-600"></i>
+                  <span>Programa Indique & Ganhe Viagens</span>
+                </div>
+                <p class="text-surface-800 text-[11px]">
+                  Compartilhe este roteiro com amigos que amam viajar. Se um amigo fechar com nossa agência, vocês dois ganham <strong>R$ 300 em créditos de passeios</strong>!
+                </p>
+                <button onclick="copyReferralLink()" class="w-full py-2 bg-white rounded-lg border border-brand-300 text-brand-800 font-bold text-[11px] hover:bg-brand-50 transition-colors flex items-center justify-center space-x-1">
+                  <i class="ph-bold ph-copy text-brand-600"></i>
+                  <span id="btn-copy-ref-text">Copiar Meu Link Exclusivo de Indicação</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Contato Direto da Consultora -->
+            <div class="flex items-center space-x-3 pt-2">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="Consultora Fernanda" class="w-10 h-10 rounded-full object-cover border-2 border-brand-500">
+              <div class="text-xs">
+                <span class="font-bold text-surface-900 block">Fernanda Lins</span>
+                <span class="text-surface-800">Sua Consultora de Viagens Dedicada</span>
+              </div>
+              <a href="https://wa.me/" target="_blank" class="ml-auto w-9 h-9 rounded-full bg-brand-100 text-brand-800 flex items-center justify-center hover:bg-brand-200 transition-colors text-lg shadow-sm hover:scale-110" title="Chamar no WhatsApp">
+                <i class="ph-fill ph-whatsapp-logo"></i>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BARRA FLUTUANTE DE CONVERSÃO MOBILE (Exclusiva para Celulares na Visão do Viajante) -->
+    <div id="mobile-sticky-cta" class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface-900/95 backdrop-blur-xl border-t border-white/10 px-4 py-2.5 shadow-2xl flex items-center justify-between">
+      <div>
+        <span class="text-[10px] text-zinc-400 block uppercase font-bold tracking-wider">A partir de</span>
+        <div class="flex items-baseline space-x-1">
+          <span class="text-xs text-brand-300 font-bold">10x</span>
+          <strong id="mob-sticky-price" class="font-display text-base font-extrabold text-white">R$ 2.480</strong>
+          <span class="text-[10px] text-zinc-400">/mês</span>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button onclick="openVipModal('Viajante VIP', 'traveler')" class="p-2.5 rounded-xl bg-red-600/25 text-rose-200 border border-red-500/40 text-xs font-bold active:scale-95" title="Passaporte VIP">
+          <i class="ph-fill ph-crown text-base text-red-400"></i>
+        </button>
+        <button onclick="openApprovalModal()" class="px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs shadow-lg flex items-center space-x-1.5 active:scale-95">
+          <i class="ph-bold ph-check-circle text-sm"></i>
+          <span>Aprovar Roteiro</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Botão Flutuante do Agente IA Qualificador (Posicionado acima da barra mobile) -->
+    <button onclick="openChatAgent()" class="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-40 bg-brand-700 hover:bg-brand-600 text-white px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-full shadow-2xl flex items-center space-x-2 border border-brand-400 group transition-all hover:scale-105 active:scale-95">
+      <div class="w-2.5 h-2.5 rounded-full bg-brand-300 animate-pulse"></div>
+      <i class="ph-fill ph-sparkle text-base sm:text-lg text-brand-200"></i>
+      <span class="text-xs font-bold font-display tracking-wide hidden xs:inline">Dúvidas da Viagem? Fale com a IA</span>
+      <span class="text-xs font-bold font-display tracking-wide xs:hidden">Falar com IA</span>
+    </button>
+
+  </main>
+
+  <!-- ========================================================
+       MODO 2: COCKPIT DA AGÊNCIA (GESTÃO, FINANCEIRO DETALHADO & ALERTAS)
+       ======================================================== -->
+  <main id="view-agency" class="hidden min-h-screen bg-surface-100/60 py-10 transition-opacity duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      
+      <!-- Cabeçalho do Cockpit com Seletor de Viagem/Grupo -->
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-surface-300 pb-6">
+        <div>
+          <span class="text-xs font-bold tracking-widest text-brand-700 uppercase">VIVANT IA • COCKPIT OPERACIONAL & FINANCEIRO</span>
+          <h2 class="font-display text-3xl font-extrabold text-surface-900 mt-1">Gestão 360° da Agência & Consultor</h2>
+          <p class="text-xs text-surface-800 mt-1">Painel financeiro categorizado com vencimentos, central de alertas ao dono e radar de passageiros.</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- Filtro por Viagem / Grupo -->
+          <div class="bg-white px-3 py-1.5 rounded-xl border border-surface-300 text-xs shadow-sm flex items-center space-x-2">
+            <span class="text-surface-800 font-bold">Viagem Selecionada:</span>
+            <select onchange="changeActiveTrip(this.value)" class="font-bold text-brand-800 bg-transparent focus:outline-none cursor-pointer">
+              <option value="italia">#104: Expedição Itália Romântica (2 Pax)</option>
+              <option value="grupo-costa">#108: Grupo Exclusivo Costa Amalfitana (12 Pax)</option>
+              <option value="paris">#109: Dr. Marcelo • Paris & Londres (4 Pax)</option>
+            </select>
+          </div>
+
+          <!-- Botão para o Dono Editar o Roteiro -->
+          <button onclick="openEditTripModal()" class="px-4 py-2 bg-surface-900 hover:bg-surface-800 text-white text-xs font-bold rounded-xl transition-all shadow-md flex items-center space-x-2 hover:scale-105 active:scale-95">
+            <i class="ph-bold ph-pencil-simple"></i>
+            <span>Editar Roteiro & Destinos</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- CENTRAL DE ALERTAS CRÍTICOS AO DONO DA AGÊNCIA -->
+      <section class="bg-gradient-to-r from-surface-900 via-surface-900 to-brand-950 text-white rounded-3xl p-5 sm:p-7 shadow-lg border border-surface-800 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-3">
+          <div class="flex items-center space-x-2.5">
+            <div class="w-8 h-8 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center text-lg shrink-0">
+              <i class="ph-fill ph-bell-ringing"></i>
+            </div>
+            <div>
+              <h3 class="font-display font-bold text-sm sm:text-base text-white">Central de Alertas Operacionais & Deadlines do Dono</h3>
+              <span class="text-[10px] sm:text-[11px] text-zinc-400">Prazos de bloqueios de hotéis, check-ins aéreos e cobranças automáticas</span>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 self-start sm:self-auto">
+            <button onclick="simulateManagerWhatsAppAlert()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs flex items-center space-x-1.5 shadow-md hover:scale-105 active:scale-95 transition-all">
+              <i class="ph-bold ph-whatsapp-logo text-base"></i>
+              <span>Simular Alerta no WhatsApp</span>
+            </button>
+            <span class="px-2.5 py-1 text-[10px] font-bold bg-red-500/20 text-rose-300 border border-red-500/40 rounded-full">
+              4 Alertas Pendentes
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+          
+          <!-- Alerta 1: Pagamento Crítico Fornecedor -->
+          <div class="bg-white/5 border border-red-500/30 rounded-2xl p-4 space-y-2 hover:bg-white/10 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-rose-300 bg-red-500/20 px-2 py-0.5 rounded">Urgência Alta</span>
+              <span class="text-[10px] text-zinc-400">Amanhã 17:00</span>
+            </div>
+            <strong class="text-white block font-display">Pagar Sinal Hotel Splendide</strong>
+            <p class="text-zinc-300 text-[11px]">Repasse de € 1.850 (R$ 11.100) para não perder o bloqueio dos quartos da Expedição Itália.</p>
+            <button onclick="simulateAction('Repasse de sinal do hotel liquidado!')" class="w-full mt-1 py-1.5 bg-red-600/20 hover:bg-red-600/30 text-rose-200 font-bold rounded-lg text-[10px] border border-red-500/30 transition-colors">
+              Marcar como Pago
+            </button>
+          </div>
+
+          <!-- Alerta 2: Check-in Aéreo dos Passageiros -->
+          <div class="bg-white/5 border border-sky-500/30 rounded-2xl p-4 space-y-2 hover:bg-white/10 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded">Check-in Voo</span>
+              <span class="text-[10px] text-zinc-400">Em 14 horas</span>
+            </div>
+            <strong class="text-white block font-display">Check-in ITA Airways AZ679</strong>
+            <p class="text-zinc-300 text-[11px]">Abertura de marcação de assentos prioritários dos 2 passageiros (Reserva #104).</p>
+            <button onclick="simulateAction('Link de check-in aberto e assentos confirmados!')" class="w-full mt-1 py-1.5 bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 font-bold rounded-lg text-[10px] border border-sky-400/30 transition-colors">
+              Acessar Check-in ITA
+            </button>
+          </div>
+
+          <!-- Alerta 3: Cobrança Pix Cliente -->
+          <div class="bg-white/5 border border-brand-500/30 rounded-2xl p-4 space-y-2 hover:bg-white/10 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-brand-400 bg-brand-500/10 px-2 py-0.5 rounded">Recebimento</span>
+              <span class="text-[10px] text-zinc-400">Vence em 3 dias</span>
+            </div>
+            <strong class="text-white block font-display">Parcela 02 Pix: R$ 2.480</strong>
+            <p class="text-zinc-300 text-[11px]">Régua amigável de cobrança via WhatsApp programada para disparar às 09h da manhã.</p>
+            <button onclick="simulatePixReminder('Viajante VIP', '2.480')" class="w-full mt-1 py-1.5 bg-brand-500/20 hover:bg-brand-500/30 text-brand-300 font-bold rounded-lg text-[10px] border border-brand-400/30 transition-colors">
+              Disparar Pix Agora
+            </button>
+          </div>
+
+          <!-- Alerta 4: Emissão de Seguro Viagem -->
+          <div class="bg-white/5 border border-purple-500/30 rounded-2xl p-4 space-y-2 hover:bg-white/10 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded">Documento</span>
+              <span class="text-[10px] text-zinc-400">Até quinta-feira</span>
+            </div>
+            <strong class="text-white block font-display">Emitir Apólice Schengen</strong>
+            <p class="text-zinc-300 text-[11px]">Conferir CPF e data de nascimento dos passageiros para gerar apólice internacional.</p>
+            <button onclick="simulateAction('Apólice Schengen emitida com sucesso!')" class="w-full mt-1 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 font-bold rounded-lg text-[10px] border border-purple-400/30 transition-colors">
+              Emitir Apólice
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- NOVIDADE SOLICITADA: GESTÃO FINANCEIRA COMPLETA E DETALHADA -->
+      <section class="bg-white rounded-3xl border border-surface-200 p-6 sm:p-8 shadow-sm space-y-8">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-surface-200 pb-4 gap-3">
+          <div>
+            <span class="text-xs font-bold tracking-widest text-brand-700 uppercase">Gestão Financeira & DRE da Agência</span>
+            <h3 class="font-display text-2xl font-bold text-surface-900 mt-0.5">Contas a Pagar, Contas a Receber & Fluxo de Caixa</h3>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="text-xs text-brand-800 bg-brand-50 border border-brand-200 px-3 py-1.5 rounded-full font-bold">
+              Previsão 30 Dias: + R$ 24.800 Entradas | - R$ 11.100 Saídas
+            </span>
+          </div>
+        </div>
+
+        <!-- TABELA 1: CONTAS A RECEBER DETALHADA (RECEITAS DE CLIENTES) -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="font-display font-bold text-base text-surface-900 flex items-center space-x-2">
+              <i class="ph-bold ph-arrow-circle-down-right text-brand-600 text-lg"></i>
+              <span>Contas a Receber (Cronograma de Parcelas do Cliente)</span>
+            </h4>
+            <span class="text-xs text-surface-800 font-bold">Total Previsto: R$ 24.800,00</span>
+          </div>
+
+          <div class="overflow-x-auto rounded-2xl border border-surface-200">
+            <table class="w-full text-left text-xs text-surface-800">
+              <thead class="bg-surface-50 text-[11px] font-bold text-surface-900 uppercase border-b border-surface-200">
+                <tr>
+                  <th class="py-3 px-4">Parcela / Título</th>
+                  <th class="py-3 px-4">Passageiro / Contrato</th>
+                  <th class="py-3 px-4">Vencimento</th>
+                  <th class="py-3 px-4">Forma de Pgto</th>
+                  <th class="py-3 px-4">Valor</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4">Ação Rápida</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-surface-100">
+                <tr class="hover:bg-brand-50/20">
+                  <td class="py-3 px-4 font-bold text-surface-900">01/10 (Entrada)</td>
+                  <td class="py-3 px-4">Expedição Itália (#104)</td>
+                  <td class="py-3 px-4">18/09/2026</td>
+                  <td class="py-3 px-4">Pix Imediato</td>
+                  <td class="py-3 px-4 font-bold text-surface-900">R$ 2.480,00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 bg-brand-100 text-brand-900 font-bold rounded text-[10px]">RECEBIDO</span></td>
+                  <td class="py-3 px-4"><span class="text-zinc-400 text-[11px]">Conciliado</span></td>
+                </tr>
+
+                <tr class="hover:bg-brand-50/20 bg-rose-50/40">
+                  <td class="py-3 px-4 font-bold text-surface-900">02/10 (Mensalidade)</td>
+                  <td class="py-3 px-4">Expedição Itália (#104)</td>
+                  <td class="py-3 px-4 font-bold text-rose-800">18/10/2026 (Em 3 dias)</td>
+                  <td class="py-3 px-4">Pix Recorrente</td>
+                  <td class="py-3 px-4 font-bold text-surface-900">R$ 2.480,00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 bg-rose-100 text-rose-900 font-bold rounded text-[10px]">A VENCER</span></td>
+                  <td class="py-3 px-4">
+                    <button onclick="simulatePixReminder('Viajante VIP', '2.480')" class="px-2.5 py-1 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-lg text-[10px] transition-colors shadow-sm">
+                      Cobrar Pix WhatsApp
+                    </button>
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-brand-50/20 opacity-80">
+                  <td class="py-3 px-4 font-bold text-surface-900">03/10 (Mensalidade)</td>
+                  <td class="py-3 px-4">Expedição Itália (#104)</td>
+                  <td class="py-3 px-4">18/11/2026</td>
+                  <td class="py-3 px-4">Boleto Bancário</td>
+                  <td class="py-3 px-4 font-bold text-surface-900">R$ 2.480,00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 bg-surface-200 text-surface-800 font-bold rounded text-[10px]">PROGRAMADO</span></td>
+                  <td class="py-3 px-4"><span class="text-zinc-400 text-[11px]">Automático</span></td>
+                </tr>
+
+                <tr class="hover:bg-brand-50/20 opacity-80">
+                  <td class="py-3 px-4 font-bold text-surface-900">04 a 10/10 (Saldo)</td>
+                  <td class="py-3 px-4">Expedição Itália (#104)</td>
+                  <td class="py-3 px-4">Mensal até Julho/27</td>
+                  <td class="py-3 px-4">Pix / Carnê Agência</td>
+                  <td class="py-3 px-4 font-bold text-surface-900">R$ 17.360,00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 bg-surface-200 text-surface-800 font-bold rounded text-[10px]">PROGRAMADO</span></td>
+                  <td class="py-3 px-4"><span class="text-zinc-400 text-[11px]">Aguardando</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TABELA 2: CONTAS A PAGAR DETALHADA (REPASSES A FORNECEDORES & DEADLINES) -->
+        <div class="space-y-3 pt-2">
+          <div class="flex items-center justify-between">
+            <h4 class="font-display font-bold text-base text-surface-900 flex items-center space-x-2">
+              <i class="ph-bold ph-arrow-circle-up-right text-rose-600 text-lg"></i>
+              <span>Contas a Pagar (Obrigações com Fornecedores & Prazos de Bloqueio)</span>
+            </h4>
+            <span class="text-xs text-rose-700 font-bold">Custo Total dos Fornecedores: R$ 20.220,00</span>
+          </div>
+
+          <div class="overflow-x-auto rounded-2xl border border-surface-200">
+            <table class="w-full text-left text-xs text-surface-800">
+              <thead class="bg-surface-50 text-[11px] font-bold text-surface-900 uppercase border-b border-surface-200">
+                <tr>
+                  <th class="py-3 px-4">Fornecedor / Serviço</th>
+                  <th class="py-3 px-4">Destino / Referência</th>
+                  <th class="py-3 px-4">Data Limite (Deadline)</th>
+                  <th class="py-3 px-4">Moeda Original</th>
+                  <th class="py-3 px-4">Valor em R$</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4">Ação</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-surface-100">
+                <tr class="hover:bg-brand-50/20 bg-rose-50/40">
+                  <td class="py-3 px-4 font-bold text-surface-900">Hotel Splendide Royal Roma</td>
+                  <td class="py-3 px-4">Hospedagem 3 Noites Roma</td>
+                  <td class="py-3 px-4 font-bold text-rose-800">Amanhã às 17h (Bloqueio)</td>
+                  <td class="py-3 px-4">€ 1.850,00</td>
+                  <td class="py-3 px-4 font-bold text-surface-900">R$ 11.100,00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 bg-rose-100 text-rose-900 font-bold rounded text-[10px]">PENDENTE</span></td>
+                  <td class="py-3 px-4">
+                    <button onclick="simulateAction('Comprovante de transferência anexado!')" class="px-2.5 py-1 bg-surface-900 hover:bg-surface-800 text-white font-bold rounded-lg text-[10px]">
+                      Liquidar
+                    </button>
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-brand-50/20">
+                  <td class="py-3 px-4 font-bold text-surface-900">Roma Luxury Chauffeur S.R.L.</td>
+                  <td class="py-3 px-4">Transfer Executivo FCO ➔ Hotel</td>
+                  <td class="py-3 px-4">25/10/2026</td>
+                  <td class="py-3 px-4">€ 180,00</td>
+                  <td class="py-3 px-4 font-bold text-surface-900">R$ 1.080,00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 bg-brand-100 text-brand-900 font-bold rounded text-[10px]">PAGO (50%)</span></td>
+                  <td class="py-3 px-4"><span class="text-zinc-400 text-[11px]">Sinal Pago</span></td>
+                </tr>
+
+                <tr class="hover:bg-brand-50/20">
+                  <td class="py-3 px-4 font-bold text-surface-900">Positano Sea Tours (Capri)</td>
+                  <td class="py-3 px-4">Barco Riva 38 Privativo</td>
+                  <td class="py-3 px-4">28/10/2026</td>
+                  <td class="py-3 px-4">€ 550,00</td>
+                  <td class="py-3 px-4 font-bold text-surface-900">R$ 3.300,00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 bg-surface-200 text-surface-800 font-bold rounded text-[10px]">PROGRAMADO</span></td>
+                  <td class="py-3 px-4"><span class="text-zinc-400 text-[11px]">No check-in</span></td>
+                </tr>
+
+                <tr class="hover:bg-brand-50/20">
+                  <td class="py-3 px-4 font-bold text-surface-900">Dra. Chiara Rossi (Guia Oficial)</td>
+                  <td class="py-3 px-4">Coliseu & Fórum Privativo</td>
+                  <td class="py-3 px-4">30/10/2026</td>
+                  <td class="py-3 px-4">€ 320,00</td>
+                  <td class="py-3 px-4 font-bold text-surface-900">R$ 1.920,00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 bg-surface-200 text-surface-800 font-bold rounded text-[10px]">PROGRAMADO</span></td>
+                  <td class="py-3 px-4"><span class="text-zinc-400 text-[11px]">Voucher OK</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- DEMONSTRATIVO DE MARGEM & COMISSÃO (DRE RESUMIDO) -->
+        <div class="bg-surface-50 rounded-2xl p-5 border border-surface-200 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+          <div>
+            <span class="text-surface-800 text-[11px] block">Receita Bruta do Roteiro:</span>
+            <strong class="font-display text-lg font-bold text-surface-900">R$ 24.800,00</strong>
+          </div>
+          <div>
+            <span class="text-surface-800 text-[11px] block">Custo Líquido dos Fornecedores:</span>
+            <strong class="font-display text-lg font-bold text-rose-700">- R$ 20.220,00</strong>
+          </div>
+          <div class="sm:border-l sm:border-surface-200 sm:pl-4">
+            <span class="text-surface-800 text-[11px] block">Margem Líquida da Agência (18.5%):</span>
+            <strong class="font-display text-lg font-bold text-brand-700">+ R$ 4.580,00</strong>
+            <span class="text-[10px] text-surface-700 block mt-0.5">(Comissão da Consultora Fernanda: R$ 1.832,00)</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- MÓDULO: TELEMETRIA COMERCIAL & RADAR DO VIAJANTE -->
+      <section class="bg-white rounded-3xl border border-surface-200 p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-surface-200 pb-4 gap-3">
+          <div>
+            <span class="text-xs font-bold tracking-widest text-brand-700 uppercase">Radar do Viajante por Grupo</span>
+            <h3 class="font-display text-xl font-bold text-surface-900 mt-0.5">Telemetria de Vendas & Disparo de Alertas</h3>
+          </div>
+
+          <button onclick="triggerGroupFlightAlert()" class="px-4 py-2 bg-brand-700 hover:bg-brand-600 text-white rounded-xl font-bold text-xs shadow-md flex items-center space-x-2 hover:scale-105 active:scale-95 transition-all">
+            <i class="ph-bold ph-broadcast text-base"></i>
+            <span>Disparar Alerta de Portão / Voo no WhatsApp do Grupo</span>
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-surface-800">
+            <thead class="bg-surface-50 text-[11px] font-bold text-surface-900 uppercase border-y border-surface-200">
+              <tr>
+                <th class="py-3 px-4">Viajante / Viagem</th>
+                <th class="py-3 px-4">Telemetria ao Vivo</th>
+                <th class="py-3 px-4">Interação do Lead</th>
+                <th class="py-3 px-4">Ação Estratégica</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-surface-100">
+              <tr class="hover:bg-brand-50/30">
+                <td class="py-3 px-4">
+                  <strong class="text-surface-900 block font-bold">Reserva Aberta (2 Passageiros)</strong>
+                  <span class="text-surface-800 text-[11px]">Itália Romântica (10 Dias)</span>
+                </td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-100 text-brand-900 border border-brand-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-600 mr-1 animate-pulse"></span>
+                    Online Agora (4 min)
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-surface-800">
+                  Visualizou o <strong>Hotel de Russie 5★</strong> e marcou o opcional de helicóptero.
+                </td>
+                <td class="py-3 px-4">
+                  <button onclick="triggerSimulatedWhatsApp('Viajante Interessado', 'hot')" class="px-3 py-1.5 bg-brand-700 hover:bg-brand-600 text-white rounded-lg font-bold text-[11px] transition-colors flex items-center space-x-1">
+                    <i class="ph-bold ph-whatsapp-logo"></i>
+                    <span>Enviar Áudio de Fechamento</span>
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="hover:bg-brand-50/30">
+                <td class="py-3 px-4">
+                  <strong class="text-surface-900 block font-bold">Dr. Marcelo Viana (4 Pax)</strong>
+                  <span class="text-surface-800 text-[11px]">Paris & Londres (7 Dias)</span>
+                </td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-900">
+                    Sem resposta há 48h
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-surface-800">
+                  Abriu 3 vezes no primeiro dia, mas travou na escolha dos hotéis.
+                </td>
+                <td class="py-3 px-4">
+                  <button onclick="triggerSimulatedWhatsApp('Dr. Marcelo', 'anti-ghosting')" class="px-3 py-1.5 bg-surface-200 hover:bg-surface-300 text-surface-900 rounded-lg font-bold text-[11px] transition-colors flex items-center space-x-1">
+                    <i class="ph-bold ph-magic-wand"></i>
+                    <span>Follow-up Anti-Ghosting IA</span>
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="hover:bg-brand-50/30">
+                <td class="py-3 px-4">
+                  <strong class="text-surface-900 block font-bold">Camila & Amigas (6 Pax)</strong>
+                  <span class="text-surface-800 text-[11px]">Cancún All-Inclusive</span>
+                </td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-surface-200 text-surface-800">
+                    Orçamento Recusado
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-surface-800">
+                  Alegou que as férias do grupo foram adiadas para novembro.
+                </td>
+                <td class="py-3 px-4">
+                  <button onclick="moveToVipCommunity('Camila Rocha')" class="px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-900 border border-purple-300 rounded-lg font-bold text-[11px] transition-colors flex items-center space-x-1">
+                    <i class="ph-bold ph-chats-circle"></i>
+                    <span>Mover p/ Comunidade VIP WhatsApp</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ========================================================
+       MODAL 0: CINEMA VÍDEO HD (SOBREVÔO COSTA AMALFITANA & ITÁLIA)
+       ======================================================== -->
+  <div id="modal-cinema-video" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6">
+    <div class="bg-surface-950 rounded-3xl max-w-4xl w-full border border-white/20 shadow-2xl overflow-hidden relative">
+      <div class="flex items-center justify-between p-4 sm:p-6 border-b border-white/10">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-md">
+            <i class="ph-bold ph-film-slate text-lg"></i>
+          </div>
+          <div>
+            <h3 class="font-display text-base sm:text-lg font-bold text-white flex items-center space-x-2">
+              <span id="cinema-modal-heading">Costa Amalfitana • Iate Riva Privativo ao Pôr do Sol</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">1080p Cinema</span>
+            </h3>
+            <p class="text-xs text-zinc-400">Imagens aéreas em alta resolução dos cenários desta expedição</p>
+          </div>
+        </div>
+        <button onclick="closeCinemaModal()" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors">
+          <i class="ph-bold ph-x text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Seletor de Cenas Aéreas -->
+      <div class="flex items-center space-x-2 px-4 sm:px-6 py-2.5 bg-black/60 border-b border-white/10 text-xs overflow-x-auto custom-scrollbar">
+        <span class="text-zinc-400 text-[11px] font-bold uppercase tracking-wider hidden sm:inline">Cenas:</span>
+        <button id="btn-cinema-riva1" onclick="switchCinemaVideo('riva1')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-600 text-white flex items-center space-x-1.5 shadow-sm transition-all whitespace-nowrap">
+          <i class="ph-bold ph-boat text-sm"></i>
+          <span>1. Positano & Iate Riva (Pôr do Sol)</span>
+        </button>
+        <button id="btn-cinema-riva2" onclick="switchCinemaVideo('riva2')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/10 hover:bg-white/20 text-zinc-300 hover:text-white flex items-center space-x-1.5 transition-all whitespace-nowrap">
+          <i class="ph-bold ph-waves text-sm"></i>
+          <span>2. Panorama Falésias & Mar Tirreno</span>
+        </button>
+        <button id="btn-cinema-rome" onclick="switchCinemaVideo('rome')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/10 hover:bg-white/20 text-zinc-300 hover:text-white flex items-center space-x-1.5 transition-all whitespace-nowrap">
+          <i class="ph-bold ph-bank text-sm"></i>
+          <span>3. Coliseu & Roma Imperial</span>
+        </button>
+      </div>
+
+      <div class="relative aspect-video bg-black flex items-center justify-center">
+        <video id="cinema-modal-video" controls playsinline class="w-full h-full object-cover">
+          <source src="positano-riva-1.mp4" type="video/mp4">
+          <source src="positano-riva-2.mp4" type="video/mp4">
+          <source src="rome-colosseum-drone.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="p-4 sm:p-5 bg-surface-900 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex items-center space-x-2 text-zinc-300">
+          <i class="ph-fill ph-map-pin text-brand-400"></i>
+          <span>Roteiro com passeios privativos em Roma, Florença, Positano e Capri</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button onclick="closeCinemaModal(); scrollToSection('itinerario');" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl transition-all shadow-md">
+            Ver Cronograma Dia a Dia
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 1: CONVITE VIP COM LINK CLICÁVEL (ENVIO IMEDIATO)
+       ======================================================== -->
+  <div id="modal-vip-invite" class="fixed inset-0 z-50 bg-surface-900/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full max-h-[92vh] overflow-y-auto p-5 sm:p-8 space-y-5 border-2 border-brand-500 shadow-2xl relative">
+      <button onclick="closeVipModal()" class="absolute top-5 right-5 text-surface-400 hover:text-surface-900 text-xl">
+        <i class="ph-bold ph-x"></i>
+      </button>
+
+      <div>
+        <div class="flex items-center space-x-2 mb-1">
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-gradient-to-r from-red-600 to-rose-500 text-white uppercase tracking-widest flex items-center space-x-1 shadow-sm">
+            <i class="ph-fill ph-crown"></i>
+            <span>ACESSO VIP EXCLUSIVO</span>
+          </span>
+          <span class="text-xs text-brand-700 font-bold">Link Clicável Gerado</span>
+        </div>
+        <h3 id="vip-modal-title" class="font-display text-xl sm:text-2xl font-bold text-surface-900">Convite VIP com Link Direto</h3>
+        <p id="vip-modal-subtitle" class="text-xs text-surface-800 mt-0.5">
+          Envie o link abaixo para acompanhantes ou amigos entrarem direto pelo navegador ou WhatsApp.
+        </p>
+      </div>
+
+      <!-- Card Visual do Passe VIP -->
+      <div class="bg-gradient-to-br from-surface-950 via-surface-900 to-brand-950 rounded-2xl p-4 sm:p-5 text-white border border-red-500/40 shadow-inner space-y-3 relative overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 w-28 h-28 bg-red-500/10 rounded-full blur-xl"></div>
+        <div class="flex items-center justify-between text-[11px] text-zinc-300 border-b border-white/10 pb-2">
+          <span class="font-display font-bold tracking-wider uppercase text-rose-300 flex items-center space-x-1">
+            <i class="ph-fill ph-sparkle text-red-400"></i>
+            <span>VIVANT IA • VIP PASS</span>
+          </span>
+          <span class="bg-white/10 px-2 py-0.5 rounded text-[10px] font-mono">ID: #VIP-9942</span>
+        </div>
+        <div>
+          <strong id="vip-card-lead" class="font-display text-base sm:text-lg font-bold text-white block">Viajante VIP • Acesso Exclusivo</strong>
+          <span class="text-xs text-zinc-300">Acesso completo ao roteiro interativo, hotéis 5★ e votação em grupo</span>
+        </div>
+        
+        <!-- O Link Clicável em Destaque -->
+        <div class="pt-2">
+          <span class="text-[10px] text-rose-200 uppercase font-bold tracking-wider block mb-1">Link Clicável de Acesso:</span>
+          <a id="vip-anchor-link" href="#" target="_blank" class="block bg-black/40 hover:bg-black/60 border border-brand-500/40 text-brand-200 hover:text-white px-3 py-2 rounded-xl text-xs font-mono break-all underline decoration-brand-400 underline-offset-4 transition-colors">
+            https://vivantia.com.br/vip/italia-expedicao?token=VIP9942&ref=whatsapp
+          </a>
+        </div>
+      </div>
+
+      <!-- Ações de Envio Direto -->
+      <div class="space-y-3 pt-1">
+        <div class="flex items-center space-x-2">
+          <input type="text" id="vip-input-link" readonly value="https://vivantia.com.br/vip/italia-expedicao?token=VIP9942&ref=whatsapp" class="w-full bg-surface-50 px-3 py-2.5 rounded-xl border border-surface-300 text-surface-800 text-xs font-mono">
+          <button onclick="copyVipLink()" class="px-5 py-2.5 bg-brand-700 hover:bg-brand-600 text-white font-bold text-xs rounded-xl whitespace-nowrap transition-colors shadow-sm flex items-center space-x-1">
+            <i class="ph-bold ph-copy"></i>
+            <span>Copiar</span>
+          </button>
+        </div>
+
+        <a id="vip-whatsapp-direct" href="#" target="_blank" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl flex items-center justify-center space-x-2 shadow-lg shadow-emerald-900/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
+          <i class="ph-bold ph-whatsapp-logo text-base"></i>
+          <span>Enviar Convite Clicável no WhatsApp</span>
+        </a>
+      </div>
+
+      <div class="flex items-center justify-between text-[11px] text-surface-700 pt-1 border-t border-surface-200">
+        <span>Quem receber o link abre na hora sem precisar de senha ou app.</span>
+        <button onclick="closeVipModal()" class="font-bold text-surface-800 hover:text-surface-900">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DO MAPA DO HOTEL -->
+  <div id="modal-map" class="fixed inset-0 z-50 bg-surface-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 border border-surface-300 shadow-2xl relative">
+      <button onclick="closeMapModal()" class="absolute top-6 right-6 text-surface-400 hover:text-surface-900 text-xl">
+        <i class="ph-bold ph-x"></i>
+      </button>
+
+      <div>
+        <span class="text-xs font-bold tracking-widest text-brand-700 uppercase">Localização & Vizinhança</span>
+        <h3 id="modal-map-title" class="font-display text-2xl font-bold text-surface-900 mt-1">Localização do Hotel</h3>
+        <p id="modal-map-address" class="text-xs text-surface-800 mt-0.5">Endereço completo</p>
+      </div>
+
+      <div class="h-56 bg-brand-900/10 rounded-2xl border border-brand-200 relative overflow-hidden flex flex-col items-center justify-center p-4 text-center">
+        <div class="w-12 h-12 rounded-full bg-brand-600 text-white flex items-center justify-center text-2xl shadow-lg mb-2 animate-bounce">
+          <i class="ph-fill ph-map-pin"></i>
+        </div>
+        <strong id="modal-map-pin-name" class="text-xs font-bold text-surface-900 block">Hotel Splendide Royal Roma</strong>
+        <span id="modal-map-distance" class="text-[11px] text-brand-800 font-medium">A 450m da Piazza di Spagna • Centro Histórico</span>
+        <div class="absolute bottom-2 right-2 text-[10px] text-surface-700 bg-white/90 px-2 py-0.5 rounded shadow">
+          Visualizador Integrado Mapas
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end space-x-3 pt-2">
+        <button onclick="closeMapModal()" class="px-5 py-2.5 rounded-xl border border-surface-300 text-xs font-bold text-surface-800 hover:bg-surface-50">
+          Fechar
+        </button>
+        <a id="modal-map-link" href="https://maps.google.com" target="_blank" class="px-5 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-600 text-white text-xs font-bold flex items-center space-x-1.5 shadow-md">
+          <i class="ph-bold ph-arrow-square-out text-sm"></i>
+          <span>Abrir no Google Maps</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE EDIÇÃO DO ROTEIRO (ACESSO DO DONO DA AGÊNCIA) -->
+  <div id="modal-edit-trip" class="fixed inset-0 z-50 bg-surface-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 border border-surface-300 shadow-2xl relative">
+      <button onclick="closeEditTripModal()" class="absolute top-6 right-6 text-surface-400 hover:text-surface-900 text-xl">
+        <i class="ph-bold ph-x"></i>
+      </button>
+
+      <div>
+        <span class="text-xs font-bold tracking-widest text-brand-700 uppercase">Gestão da Agência</span>
+        <h3 class="font-display text-2xl font-bold text-surface-900 mt-1">Editar Dados da Viagem</h3>
+        <p class="text-xs text-surface-800 mt-0.5">Altere o nome da viagem, datas, hotéis e valores da proposta em segundos.</p>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="font-bold text-surface-900 block mb-1">Título do Roteiro:</label>
+          <input type="text" id="edit-title-input" value="A Essência da Itália Romântica & Gastronômica" class="w-full p-2.5 rounded-xl border border-surface-300 font-sans focus:outline-brand-600">
+        </div>
+        <div>
+          <label class="font-bold text-surface-900 block mb-1">Nome do Passageiro / Grupo:</label>
+          <input type="text" value="Expedição Aberta • Grupo Selecionado" class="w-full p-2.5 rounded-xl border border-surface-300 font-sans focus:outline-brand-600">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="font-bold text-surface-900 block mb-1">Valor Base (R$):</label>
+            <input type="number" id="edit-price-input" value="24800" class="w-full p-2.5 rounded-xl border border-surface-300 font-sans focus:outline-brand-600">
+          </div>
+          <div>
+            <label class="font-bold text-surface-900 block mb-1">Dias de Duração:</label>
+            <input type="number" value="10" class="w-full p-2.5 rounded-xl border border-surface-300 font-sans focus:outline-brand-600">
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end space-x-3 pt-2">
+        <button onclick="closeEditTripModal()" class="px-5 py-2.5 rounded-xl border border-surface-300 text-xs font-bold text-surface-800 hover:bg-surface-50">
+          Cancelar
+        </button>
+        <button onclick="saveTripEdits()" class="px-5 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-600 text-white text-xs font-bold shadow-md">
+          Salvar Alterações
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DO AGENTE IA QUALIFICADOR -->
+  <div id="modal-chat-agent" class="fixed inset-0 z-50 bg-surface-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 space-y-4 border border-surface-300 shadow-2xl relative flex flex-col max-h-[85vh]">
+      <button onclick="closeChatAgent()" class="absolute top-6 right-6 text-surface-400 hover:text-surface-900 text-xl">
+        <i class="ph-bold ph-x"></i>
+      </button>
+
+      <div class="flex items-center space-x-3 border-b border-surface-200 pb-3">
+        <div class="w-10 h-10 rounded-full bg-brand-700 text-white flex items-center justify-center text-xl">
+          <i class="ph-fill ph-sparkle"></i>
+        </div>
+        <div>
+          <h4 class="font-display font-bold text-base text-surface-900">Vivant IA • Concierge de Vendas</h4>
+          <span class="text-[11px] text-brand-700 font-bold flex items-center">
+            <span class="w-2 h-2 rounded-full bg-brand-500 mr-1 animate-pulse"></span> Pronto para tirar dúvidas da viagem
+          </span>
+        </div>
+      </div>
+
+      <div class="flex-1 overflow-y-auto space-y-3 text-xs pr-1 custom-scrollbar">
+        <div class="p-3 bg-surface-100 rounded-2xl rounded-tl-none max-w-[85%] text-surface-800">
+          Olá! Sou a assistente de inteligência artificial da Vivant IA. Você tem alguma dúvida sobre os passeios, hotéis 5★ ou formas de pagamento da expedição na Itália?
+        </div>
+        <div class="p-3 bg-brand-700 text-white rounded-2xl rounded-tr-none max-w-[85%] ml-auto">
+          O passeio de barco em Capri inclui parada para almoço?
+        </div>
+        <div class="p-3 bg-surface-100 rounded-2xl rounded-tl-none max-w-[85%] text-surface-800">
+          Sim! O barco Riva 38 privativo atraca no lendário restaurante <em>La Fontelina</em> ou <em>Il Riccio</em> para vocês almoçarem com vista para os Faraglioni. O capitão faz a reserva da mesa!
+        </div>
+      </div>
+
+      <div class="pt-2 border-t border-surface-200 space-y-2">
+        <button onclick="transferToHumanSdr()" class="w-full py-2.5 bg-brand-700 hover:bg-brand-600 text-white font-bold text-xs rounded-xl flex items-center justify-center space-x-2 shadow-md hover:scale-[1.02] active:scale-[0.98]">
+          <i class="ph-bold ph-whatsapp-logo text-base"></i>
+          <span>Falar com a Consultora Fernanda no WhatsApp</span>
+        </button>
+        <span class="text-[10px] text-surface-800 text-center block">Lead qualificado e direcionado com histórico da conversa.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CONVIDAR AMIGO -->
+  <div id="modal-invite" class="fixed inset-0 z-50 bg-surface-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 border border-surface-300 shadow-2xl relative">
+      <button onclick="closeInviteModal()" class="absolute top-6 right-6 text-surface-400 hover:text-surface-900 text-xl">
+        <i class="ph-bold ph-x"></i>
+      </button>
+
+      <div>
+        <span class="text-xs font-bold tracking-widest text-brand-700 uppercase">Compartilhamento do Roteiro</span>
+        <h3 class="font-display text-2xl font-bold text-surface-900 mt-1">Convidar Amigo</h3>
+        <p class="text-xs text-surface-800 mt-1">Envie o link desta expedição para amigos, cônjuge ou quem você quer levar nesta viagem incrível pela Itália!</p>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <div class="p-3 bg-surface-50 rounded-xl border border-surface-200 space-y-1.5">
+          <label class="font-bold text-surface-900 block text-[11px] uppercase">Link de Compartilhamento do Roteiro</label>
+          <div class="flex items-center space-x-2">
+            <input type="text" id="invite-link-input" readonly value="https://vivantia.com.br/roteiro/italia-romantica?ref=convite_viajante" class="w-full bg-white px-3 py-2 rounded-lg border border-surface-300 text-surface-800 text-xs font-mono">
+            <button onclick="copyInviteLink()" class="px-4 py-2 bg-brand-700 hover:bg-brand-600 text-white font-bold rounded-lg whitespace-nowrap transition-colors">
+              Copiar
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3 p-3 bg-brand-50 rounded-xl border border-brand-200 text-brand-900">
+          <i class="ph-fill ph-check-circle text-lg flex-shrink-0 text-brand-600"></i>
+          <span class="text-[11px] leading-relaxed">
+            Seus amigos ou acompanhantes poderão visualizar todos os hotéis 5★, passeios privativos e votar nas experiências favoritas!
+          </span>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end space-x-3 pt-2">
+        <button onclick="closeInviteModal()" class="px-5 py-2.5 rounded-xl border border-surface-300 text-xs font-bold text-surface-800 hover:bg-surface-50">
+          Fechar
+        </button>
+        <a href="https://api.whatsapp.com/send?text=Oi!%20D%C3%A1%20uma%20olhada%20neste%20roteiro%20incr%C3%ADvel%20da%20It%C3%A1lia%20com%20hot%C3%A9is%205%E2%98%85%20e%20passeios%20privativos:%20https://vivantia.com.br/roteiro/italia-romantica" target="_blank" class="px-5 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-600 text-white text-xs font-bold flex items-center space-x-1.5 shadow-md">
+          <i class="ph-bold ph-whatsapp-logo text-sm"></i>
+          <span>Enviar direto no WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: APROVAÇÃO, CONTRATO & PIX -->
+  <div id="modal-approval" class="fixed inset-0 z-50 bg-surface-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-6 border border-surface-300 shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+      <button onclick="closeApprovalModal()" class="absolute top-6 right-6 text-surface-400 hover:text-surface-900 text-xl">
+        <i class="ph-bold ph-x"></i>
+      </button>
+
+      <div>
+        <span class="text-xs font-bold tracking-widest text-brand-700 uppercase">Fechamento Imediato</span>
+        <h3 class="font-display text-2xl font-bold text-surface-900 mt-1">Aprovar Proposta & Garantir Reserva</h3>
+        <p class="text-xs text-surface-800 mt-1">Confira o resumo final, aceite os termos de intermediação turística e reserve sua viagem.</p>
+      </div>
+
+      <div class="bg-surface-50 rounded-2xl p-4 border border-surface-200 text-xs space-y-2">
+        <div class="flex justify-between text-surface-800">
+          <span>Pacote Base Itália Romântica (10 Dias):</span>
+          <span>R$ 24.800</span>
+        </div>
+        <div id="modal-line-upgrade" class="flex justify-between text-surface-800 hidden">
+          <span>Upgrade Hospedagem (Hotel de Russie 5★):</span>
+          <span class="text-brand-700 font-bold">+ R$ 3.800</span>
+        </div>
+        <div id="modal-line-addons" class="flex justify-between text-surface-800 hidden">
+          <span>Experiências Opcionais Selecionadas:</span>
+          <span id="modal-addons-val" class="text-brand-700 font-bold">+ R$ 0</span>
+        </div>
+        <div class="border-t border-surface-300 pt-2 flex justify-between font-bold text-sm text-surface-900">
+          <span>Total Final:</span>
+          <span id="modal-final-total" class="font-display text-lg text-brand-800">R$ 24.800</span>
+        </div>
+      </div>
+
+      <div class="p-4 bg-surface-100 rounded-xl border border-surface-200 text-[11px] text-surface-800 space-y-2 leading-relaxed">
+        <strong class="text-surface-900 block font-bold">Termo Resumido de Intermediação de Serviços Turísticos:</strong>
+        <p>
+          Ao clicar em confirmar, declaro ciência das políticas de cancelamento dos hotéis fornecedores e autorizo a emissão dos bloqueios pela Vivant IA Tecnologia & Viagens (CNPJ: 32.411.092/0001-84).
+        </p>
+        <label class="flex items-center space-x-2 pt-1 font-bold text-surface-900 cursor-pointer">
+          <input type="checkbox" id="check-terms" checked class="w-4 h-4 rounded text-brand-600">
+          <span>Li e concordo com os termos do contrato de viagem.</span>
+        </label>
+      </div>
+
+      <div class="p-5 bg-brand-50 rounded-2xl border border-brand-200 text-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="font-bold text-brand-900 text-sm">Entrada da Reserva via Pix Imediato</span>
+          <span id="modal-pix-val" class="font-display font-extrabold text-base text-brand-800">R$ 2.480,00</span>
+        </div>
+        <p class="text-[11px] text-brand-800">Escaneie o QR Code abaixo no app do seu banco para congelar as tarifas:</p>
+        
+        <div class="flex flex-col sm:flex-row items-center gap-4 bg-white p-3 rounded-xl border border-brand-200">
+          <div class="w-24 h-24 bg-surface-900 rounded-lg flex items-center justify-center text-white text-[10px] text-center p-2">
+            [QR CODE PIX DINÂMICO]
+          </div>
+          <div class="flex-1 w-full space-y-2">
+            <span class="text-[10px] text-surface-700 font-mono block break-all">00020126580014br.gov.bcb.pix0136vivant-ia-italia-9942</span>
+            <button onclick="copyPixCode()" class="w-full py-1.5 bg-brand-700 hover:bg-brand-600 text-white font-bold rounded-lg text-xs transition-colors">
+              Copiar Código Pix Copia e Cola
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end space-x-3 pt-2">
+        <button onclick="closeApprovalModal()" class="px-5 py-2.5 rounded-xl border border-surface-300 text-xs font-bold text-surface-800 hover:bg-surface-50">
+          Voltar ao Roteiro
+        </button>
+        <button onclick="confirmBooking()" class="px-6 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-600 text-white text-xs font-bold shadow-lg shadow-brand-900/20">
+          Confirmar e Notificar Consultora
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANNER SIMULADO DE NOTIFICAÇÃO NO WHATSAPP DO GESTOR -->
+  <div id="banner-manager-whatsapp" class="fixed top-5 left-1/2 transform -translate-x-1/2 -translate-y-48 z-50 max-w-lg w-[94%] bg-surface-900/95 text-white p-4 rounded-2xl shadow-2xl border-2 border-emerald-500 backdrop-blur-xl transition-all duration-500 hidden space-y-2">
+    <div class="flex items-center justify-between text-xs">
+      <div class="flex items-center space-x-2">
+        <div class="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs">
+          <i class="ph-bold ph-whatsapp-logo"></i>
+        </div>
+        <strong class="font-bold text-white">WhatsApp • Vivant IA Bot (Gestor da Agência)</strong>
+      </div>
+      <span class="text-[10px] text-zinc-400">Agora</span>
+    </div>
+    <div class="text-xs text-zinc-200 leading-relaxed bg-black/40 p-3 rounded-xl border border-white/10 space-y-1">
+      <div class="flex items-center justify-between">
+        <strong class="text-rose-400 block font-display">🚨 ALERTA DE PRAZO CRÍTICO RECEBIDO!</strong>
+        <span class="text-[10px] bg-rose-500/30 text-rose-300 px-2 py-0.5 rounded font-bold">Vence em 24h</span>
+      </div>
+      <p class="text-[11px] text-zinc-300">
+        Olá Rubens! O repasse de <strong>€ 1.850 (Hotel Splendide Roma)</strong> da expedição Itália Romântica vence amanhã às 17h. O bloqueio dos quartos corre risco de expirar.
+      </p>
+    </div>
+    <div class="flex items-center justify-end space-x-2 pt-1 text-xs">
+      <button onclick="dismissManagerBanner()" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-zinc-300 rounded-lg text-xs">Dispensar</button>
+      <button onclick="dismissManagerBanner(); simulateAction('Repasse aprovado pelo Gestor via WhatsApp com sucesso!')" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg text-xs flex items-center space-x-1 shadow-md">
+        <i class="ph-bold ph-check"></i>
+        <span>Aprovar Pagamento no Pix</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast de Notificação Dinâmica -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-surface-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-brand-500/40 text-xs font-bold transform translate-y-28 opacity-0 transition-all duration-300 flex items-center space-x-2">
+    <i class="ph-fill ph-check-circle text-brand-400 text-lg"></i>
+    <span id="toast-message">Ação realizada com sucesso!</span>
+  </div>
+
+  <!-- ========================================================
+       JAVASCRIPT: SLIDESHOW AUTOMÁTICO, VÍDEO & INTERATIVIDADE
+       ======================================================== -->
+  <script>
+    // Estado Financeiro
+    let basePrice = 24800;
+    let hotelUpgrade = 0;
+    let addonsTotal = 0;
+    let selectedAddons = {};
+
+    // Dados dos Slideshows das Paradas (Dias 1, 2 e 3)
+    const daySlides = {
+      1: [
+        {
+          tag: "Momento 1: Boas-Vindas no Aeroporto FCO",
+          title: "Transfer Executivo Privativo em Mercedes Classe E",
+          desc: "Recepção VIP na área de desembarque com motorista executivo bilíngue, água San Pellegrino fresca e translado sem esperas até o hotel palaciano.",
+          img: "https://images.unsplash.com/photo-1549144511-f099e773c147?auto=format&fit=crop&w=1200&q=80"
+        },
+        {
+          tag: "Momento 2: Hotel Splendide Royal 5★",
+          title: "Suíte Imperial com Vista para a Villa Borghese",
+          desc: "Acomodação palaciana em um dos endereços mais refinados de Roma, com decoração neoclássica e serviço de concierge 24h.",
+          img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"
+        },
+        {
+          tag: "Momento 3: Passeio Pôr do Sol",
+          title: "Piazza di Spagna & Trinità dei Monti Iluminada",
+          desc: "Caminhada relaxante de aclimatação pelas escadarias célebres da Piazza di Spagna e Via Condotti na luz dourada do final de tarde.",
+          img: "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=1200&q=80"
+        },
+        {
+          tag: "Momento 4: Gastronomia de Abertura",
+          title: "Jantar no Rooftop do Restaurante Mirabelle",
+          desc: "Mesa reservada na sacada panorâmica de alta gastronomia com vista deslumbrante para a cúpula da Basílica de São Pedro.",
+          img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80"
+        }
+      ],
+      2: [
+        {
+          tag: "Parada 1: Subterrâneo do Coliseu",
+          title: "Área Restrita dos Gladiadores & Hipogeu",
+          desc: "Acesso exclusivo aos corredores subterrâneos onde feras e gladiadores aguardavam para subir na arena através de elevadores mecânicos antigos.",
+          img: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80"
+        },
+        {
+          tag: "Parada 2: Arena Central",
+          title: "Piso Reconstruído da Arena dos Gladiadores",
+          desc: "Pise exatamente no solo de combate onde o imperador e 50.000 espectadores assistiam aos jogos épicos de Roma.",
+          img: "https://images.unsplash.com/photo-1555992828-ca4dbe41d294?auto=format&fit=crop&w=1200&q=80"
+        },
+        {
+          tag: "Parada 3: Fórum Romano & Palatino",
+          title: "O Epicentro Político do Império Romano",
+          desc: "Caminhada guiada pelas ruínas dos templos de Júlio César, Cúria do Senado e Arcos do Triunfo com reconstituições históricas.",
+          img: "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=1200&q=80"
+        },
+        {
+          tag: "Parada 4: Gelateria Histórica Giolitti",
+          title: "Pausa Gastronômica: O Melhor Gelato de Roma",
+          desc: "Parada técnica para degustar os sabores clássicos artesanais de pistache siciliano e zabaione na cafeteria favorita de personalidades mundiais.",
+          img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=80"
+        }
+      ],
+      3: [
+        {
+          tag: "Parada 1: Marina Grande de Capri",
+          title: "Embarque Privativo em Lancha Riva 38 Exclusiva",
+          desc: "Skipper local nativo da ilha, toalhas de praia aveludadas, solário com espreguiçadeiras e seleção de frutas mediterrâneas frescas a bordo.",
+          img: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=80"
+        },
+        {
+          tag: "Parada 2: Faraglioni de Capri",
+          title: "Navegação sob o Lendário Arco do Amor",
+          desc: "Passagem clássica sob a monumental fenda dos rochedos Faraglioni, acompanhada de um brinde com taças de Prosecco DOCG gelado.",
+          img: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80"
+        },
+        {
+          tag: "Parada 3: Gruta Branca & Banho de Mar",
+          title: "Mergulho Snorkel em Enseadas Turquesa Secretas",
+          desc: "Parada em águas mornas e translúcidas aos pés das falésias de calcário, com equipamento completo de mergulho livre fornecido.",
+          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+        },
+        {
+          tag: "Parada 4: Positano & Almoço à Beira-Mar",
+          title: "Falésias Coloridas & Espaguete com Frutos do Mar",
+          desc: "Desembarque na praia de Positano para almoço típico em restaurante sobre as rochas e passeio descontraído pelas vielas floridas.",
+          img: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80"
+        }
+      ]
+    };
+
+    const currentSlideIndex = { 1: 0, 2: 0, 3: 0 };
+    let slideInterval = null;
+
+    function setDaySlide(day, idx) {
+      if (!daySlides[day]) return;
+      currentSlideIndex[day] = idx;
+      updateDaySlideUI(day);
+      resetSlideTimer();
+    }
+
+    function nextDaySlide(day) {
+      if (!daySlides[day]) return;
+      currentSlideIndex[day] = (currentSlideIndex[day] + 1) % daySlides[day].length;
+      updateDaySlideUI(day);
+    }
+
+    function prevDaySlide(day) {
+      if (!daySlides[day]) return;
+      currentSlideIndex[day] = (currentSlideIndex[day] - 1 + daySlides[day].length) % daySlides[day].length;
+      updateDaySlideUI(day);
+      resetSlideTimer();
+    }
+
+    function updateDaySlideUI(day) {
+      const data = daySlides[day][currentSlideIndex[day]];
+      const idx = currentSlideIndex[day];
+
+      const countElem = document.getElementById(`carousel-current-index-d${day}`);
+      const tagElem = document.getElementById(`carousel-tag-d${day}`);
+      const titleElem = document.getElementById(`carousel-title-d${day}`);
+      const descElem = document.getElementById(`carousel-desc-d${day}`);
+      const imgElem = document.getElementById(`carousel-img-d${day}`);
+
+      if (countElem) countElem.textContent = idx + 1;
+      if (tagElem) tagElem.textContent = data.tag;
+      if (titleElem) titleElem.textContent = data.title;
+      if (descElem) descElem.textContent = data.desc;
+
+      if (imgElem) {
+        imgElem.style.opacity = '0.35';
+        imgElem.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+          imgElem.src = data.img;
+          imgElem.style.opacity = '1';
+          imgElem.style.transform = 'scale(1)';
+        }, 180);
+      }
+
+      // Atualiza bordas das miniaturas para o dia correspondente
+      for (let i = 0; i < 4; i++) {
+        const thumb = document.getElementById(`thumb-d${day}-${i}`);
+        if (thumb) {
+          if (i === idx) {
+            thumb.className = 'h-16 rounded-xl overflow-hidden border-2 border-brand-600 focus:outline-none relative scale-105 transition-all shadow-md';
+          } else {
+            thumb.className = 'h-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-400 focus:outline-none relative transition-all opacity-70 hover:opacity-100';
+          }
+        }
+      }
+    }
+
+    // Compatibilidade com chamadas legadas
+    function setTourSlide(idx) { setDaySlide(2, idx); }
+    function nextTourSlide() { nextDaySlide(2); }
+    function prevTourSlide() { prevDaySlide(2); }
+
+    // Auto-Play dos Slideshows a cada 4.5 segundos
+    function startSlideTimer() {
+      if (!slideInterval) {
+        slideInterval = setInterval(() => {
+          nextDaySlide(1);
+          nextDaySlide(2);
+          nextDaySlide(3);
+        }, 4500);
+      }
+    }
+
+    function stopSlideTimer() {
+      if (slideInterval) {
+        clearInterval(slideInterval);
+        slideInterval = null;
+      }
+    }
+
+    function resetSlideTimer() {
+      stopSlideTimer();
+      startSlideTimer();
+    }
+
+    // Alternador de Cenas no Modal Cinema
+    function switchCinemaVideo(scene) {
+      const cinemaVideo = document.getElementById('cinema-modal-video');
+      const heading = document.getElementById('cinema-modal-heading');
+      const btnRiva1 = document.getElementById('btn-cinema-riva1');
+      const btnRiva2 = document.getElementById('btn-cinema-riva2');
+      const btnRome = document.getElementById('btn-cinema-rome');
+      if (!cinemaVideo) return;
+
+      const activeClass = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-600 text-white flex items-center space-x-1.5 shadow-sm transition-all whitespace-nowrap';
+      const inactiveClass = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/10 hover:bg-white/20 text-zinc-300 hover:text-white flex items-center space-x-1.5 transition-all whitespace-nowrap';
+
+      if (btnRiva1) btnRiva1.className = inactiveClass;
+      if (btnRiva2) btnRiva2.className = inactiveClass;
+      if (btnRome) btnRome.className = inactiveClass;
+
+      if (scene === 'riva1') {
+        cinemaVideo.src = 'positano-riva-1.mp4';
+        if (heading) heading.textContent = 'Costa Amalfitana • Iate Riva Privativo ao Pôr do Sol';
+        if (btnRiva1) btnRiva1.className = activeClass;
+      } else if (scene === 'riva2') {
+        cinemaVideo.src = 'positano-riva-2.mp4';
+        if (heading) heading.textContent = 'Costa Amalfitana • Panorama de Positano & Falésias';
+        if (btnRiva2) btnRiva2.className = activeClass;
+      } else if (scene === 'rome') {
+        cinemaVideo.src = 'rome-colosseum-drone.mp4';
+        if (heading) heading.textContent = 'Roma Imperial • Coliseu & Fóruns Romanos em 4K';
+        if (btnRome) btnRome.className = activeClass;
+      }
+      cinemaVideo.currentTime = 0;
+      cinemaVideo.play().catch(e => console.log('Scene play:', e));
+    }
+
+    // Inicializações no Carregamento da Página
+    window.addEventListener('DOMContentLoaded', () => {
+      startSlideTimer();
+
+      // Pausa ao passar o mouse sobre qualquer container de slideshow
+      ['day1-card-container', 'day2-card-container', 'day3-card-container'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener('mouseenter', stopSlideTimer);
+          el.addEventListener('mouseleave', startSlideTimer);
+        }
+      });
+
+      // Sincronização e Inicialização do Vídeo Aéreo do Topo
+      const heroVideo = document.getElementById('hero-video');
+      if (heroVideo) {
+        heroVideo.addEventListener('play', () => {
+          const icon = document.getElementById('icon-toggle-video');
+          const text = document.getElementById('text-toggle-video');
+          if (icon) icon.className = 'ph-fill ph-pause-circle text-brand-300 text-base';
+          if (text) text.textContent = 'Pausar Fundo';
+        });
+        heroVideo.addEventListener('pause', () => {
+          const icon = document.getElementById('icon-toggle-video');
+          const text = document.getElementById('text-toggle-video');
+          if (icon) icon.className = 'ph-fill ph-play-circle text-emerald-400 text-base';
+          if (text) text.textContent = 'Retomar Fundo';
+        });
+        heroVideo.muted = true;
+        heroVideo.play().catch(e => console.log('Autoplay do loop aéreo aguarda interação:', e));
+      }
+    });
+
+    // Controle do Vídeo do Topo e Modal Cinema HD
+    function toggleHeroVideo() {
+      const video = document.getElementById('hero-video');
+      const icon = document.getElementById('icon-toggle-video');
+      const text = document.getElementById('text-toggle-video');
+      if (!video) return;
+
+      if (!video.paused) {
+        video.pause();
+        if (icon) icon.className = 'ph-fill ph-play-circle text-emerald-400 text-base';
+        if (text) text.textContent = 'Retomar Fundo';
+        showToast('Vídeo aéreo pausado.');
+      } else {
+        video.muted = true;
+        const p = video.play();
+        if (p !== undefined) {
+          p.then(() => {
+            if (icon) icon.className = 'ph-fill ph-pause-circle text-brand-300 text-base';
+            if (text) text.textContent = 'Pausar Fundo';
+            showToast('Vídeo aéreo reproduzindo.');
+          }).catch(err => {
+            console.warn('Erro ao reproduzir:', err);
+            video.muted = true;
+            video.play();
+          });
+        }
+      }
+    }
+
+    // Modal Cinema para Assistir ao Vídeo em Alta Definição
+    function openCinemaModal() {
+      const modal = document.getElementById('modal-cinema-video');
+      const cinemaVideo = document.getElementById('cinema-modal-video');
+      if (modal) {
+        modal.classList.remove('hidden');
+        if (cinemaVideo) {
+          cinemaVideo.currentTime = 0;
+          cinemaVideo.play().catch(e => console.log('Autoplay modal video:', e));
+        }
+      }
+    }
+
+    function closeCinemaModal() {
+      const modal = document.getElementById('modal-cinema-video');
+      const cinemaVideo = document.getElementById('cinema-modal-video');
+      if (modal) {
+        modal.classList.add('hidden');
+        if (cinemaVideo) {
+          cinemaVideo.pause();
+        }
+      }
+    }
+
+    // Cálculos Dinâmicos
+    function updateCalculations() {
+      const totalRaw = basePrice + hotelUpgrade + addonsTotal;
+      const installmentsVal = Math.round(totalRaw / 10);
+      const totalCashVal = Math.round(totalRaw * 0.95);
+
+      document.getElementById('display-installments').textContent = 'R$ ' + installmentsVal.toLocaleString('pt-BR');
+      document.getElementById('display-total-raw').textContent = 'R$ ' + totalRaw.toLocaleString('pt-BR');
+      document.getElementById('display-total-cash').textContent = 'R$ ' + totalCashVal.toLocaleString('pt-BR');
+
+      document.getElementById('modal-final-total').textContent = 'R$ ' + totalRaw.toLocaleString('pt-BR');
+      document.getElementById('modal-pix-val').textContent = 'R$ ' + installmentsVal.toLocaleString('pt-BR') + ',00';
+
+      const lineUpgrade = document.getElementById('modal-line-upgrade');
+      if (hotelUpgrade > 0) {
+        lineUpgrade.classList.remove('hidden');
+      } else {
+        lineUpgrade.classList.add('hidden');
+      }
+
+      const lineAddons = document.getElementById('modal-line-addons');
+      if (addonsTotal > 0) {
+        lineAddons.classList.remove('hidden');
+        document.getElementById('modal-addons-val').textContent = '+ R$ ' + addonsTotal.toLocaleString('pt-BR');
+      } else {
+        lineAddons.classList.add('hidden');
+      }
+    }
+
+    function selectHotelOption(opt, additionalPrice) {
+      hotelUpgrade = additionalPrice;
+      const optA = document.getElementById('hotel-opt-a');
+      const optB = document.getElementById('hotel-opt-b');
+
+      if (opt === 'A') {
+        optA.className = 'border-2 border-brand-600 bg-brand-50/30 rounded-2xl p-5 cursor-pointer transition-all relative space-y-3 hover-lift';
+        optB.className = 'border-2 border-surface-200 hover:border-brand-400 bg-white rounded-2xl p-5 cursor-pointer transition-all relative space-y-3 hover-lift';
+      } else {
+        optB.className = 'border-2 border-brand-600 bg-brand-50/30 rounded-2xl p-5 cursor-pointer transition-all relative space-y-3 hover-lift';
+        optA.className = 'border-2 border-surface-200 hover:border-brand-400 bg-white rounded-2xl p-5 cursor-pointer transition-all relative space-y-3 hover-lift';
+      }
+
+      updateCalculations();
+      showToast('Hotel atualizado! Total e parcelas recalculados.');
+    }
+
+    function toggleAddon(id, price, isChecked) {
+      if (isChecked) {
+        selectedAddons[id] = price;
+      } else {
+        delete selectedAddons[id];
+      }
+      addonsTotal = Object.values(selectedAddons).reduce((a, b) => a + b, 0);
+      updateCalculations();
+      showToast('Opcional atualizado! Recalculado em tempo real.');
+    }
+
+    // Modal de Mapa
+    function openMapModal(name, address, distance) {
+      document.getElementById('modal-map-title').textContent = name;
+      document.getElementById('modal-map-address').textContent = address;
+      document.getElementById('modal-map-pin-name').textContent = name;
+      document.getElementById('modal-map-distance').textContent = distance;
+      document.getElementById('modal-map-link').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(name + ' ' + address);
+      document.getElementById('modal-map').classList.remove('hidden');
+    }
+    function closeMapModal() {
+      document.getElementById('modal-map').classList.add('hidden');
+    }
+
+    // Modal de Edição da Viagem pelo Dono
+    function openEditTripModal() {
+      document.getElementById('modal-edit-trip').classList.remove('hidden');
+    }
+    function closeEditTripModal() {
+      document.getElementById('modal-edit-trip').classList.add('hidden');
+    }
+    function saveTripEdits() {
+      const newTitle = document.getElementById('edit-title-input').value;
+      const newPrice = parseFloat(document.getElementById('edit-price-input').value) || 24800;
+      basePrice = newPrice;
+      updateCalculations();
+      closeEditTripModal();
+      showToast('Roteiro atualizado pelo Dono da Agência com sucesso!');
+    }
+
+    // Modal do Agente IA Qualificador
+    function openChatAgent() {
+      document.getElementById('modal-chat-agent').classList.remove('hidden');
+    }
+    function closeChatAgent() {
+      document.getElementById('modal-chat-agent').classList.add('hidden');
+    }
+    function transferToHumanSdr() {
+      closeChatAgent();
+      window.open('https://api.whatsapp.com/send?text=Oi%20Fernanda!%20Tirei%20d%C3%BAvidas%20com%20a%20IA%20sobre%20a%20It%C3%A1lia%20e%20gostaria%20de%20fechar%20a%20reserva!', '_blank');
+      showToast('Transferindo lead qualificado para a Consultora Fernanda!');
+    }
+
+    // Modal de Convite VIP
+    function openVipModal(leadName, type) {
+      const modal = document.getElementById('modal-vip-invite');
+      const title = document.getElementById('vip-modal-title');
+      const subtitle = document.getElementById('vip-modal-subtitle');
+      const cardLead = document.getElementById('vip-card-lead');
+      const anchor = document.getElementById('vip-anchor-link');
+      const input = document.getElementById('vip-input-link');
+      const waBtn = document.getElementById('vip-whatsapp-direct');
+
+      if (type === 'community') {
+        title.textContent = 'Convite para a Comunidade VIP • ' + leadName;
+        subtitle.textContent = 'Link direto clicável para o lead entrar no Clube de Ofertas no WhatsApp e compartilhar com amigos.';
+        cardLead.textContent = leadName + ' • Convidada VIP';
+        const link = 'https://chat.whatsapp.com/VivantIAClubeVIP?ref=' + encodeURIComponent(leadName);
+        anchor.href = link;
+        anchor.textContent = link;
+        input.value = link;
+        const msg = encodeURIComponent('Olá ' + leadName + '! Preparei seu Passe VIP Exclusivo para o Clube Secreto da Vivant IA no WhatsApp. Acesse pacotes com até 40% OFF antes de todo mundo! Clique para entrar ou envie para quem viaja com você: ' + link);
+        waBtn.href = 'https://api.whatsapp.com/send?text=' + msg;
+      } else {
+        title.textContent = 'Passaporte VIP de Acompanhante • ' + leadName;
+        subtitle.textContent = 'Envie este link direto para amigos ou acompanhantes de viagem visualizarem o roteiro completo com status VIP.';
+        cardLead.textContent = leadName + ' • Acesso VIP';
+        const link = 'https://vivantia.com.br/vip/italia-expedicao?guest=vip_convidado';
+        anchor.href = link;
+        anchor.textContent = link;
+        input.value = link;
+        const msg = encodeURIComponent('Oi! Te passei nosso convite VIP para a expedição exclusiva na Itália com a Vivant IA. Dá uma olhada no roteiro completo e nos hotéis 5★ aqui: ' + link);
+        waBtn.href = 'https://api.whatsapp.com/send?text=' + msg;
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeVipModal() {
+      document.getElementById('modal-vip-invite').classList.add('hidden');
+    }
+
+    function copyVipLink() {
+      navigator.clipboard.writeText(document.getElementById('vip-input-link').value);
+      showToast('Link VIP copiado! Envie para quem você quiser.');
+    }
+
+    function moveToVipCommunity(leadName) {
+      openVipModal(leadName, 'community');
+      showToast('✨ Passe VIP gerado com link clicável pronto para envio!');
+    }
+
+    // Alerta de Portão / Voo em Massa (Agência)
+    function triggerGroupFlightAlert() {
+      showToast('🚨 Alerta emitido para os 14 viajantes: "Voo AZ679: Portão alterado para G12 (Terminal 3)".');
+    }
+
+    function switchMode(mode) {
+      const viewTraveler = document.getElementById('view-traveler');
+      const viewAgency = document.getElementById('view-agency');
+      const btnTraveler = document.getElementById('btn-mode-traveler');
+      const btnAgency = document.getElementById('btn-mode-agency');
+      const btnTravelerMob = document.getElementById('btn-mode-traveler-mob');
+      const btnAgencyMob = document.getElementById('btn-mode-agency-mob');
+      const mobileStickyCta = document.getElementById('mobile-sticky-cta');
+
+      if (mode === 'traveler') {
+        viewTraveler.classList.remove('hidden');
+        viewAgency.classList.add('hidden');
+        if (btnTraveler) btnTraveler.className = 'px-4 py-1.5 rounded-full text-xs font-bold flex items-center space-x-2 transition-all duration-300 bg-brand-600 text-white shadow-sm hover:scale-[1.02] active:scale-[0.98]';
+        if (btnAgency) btnAgency.className = 'px-4 py-1.5 rounded-full text-xs font-semibold flex items-center space-x-2 transition-all duration-300 text-zinc-300 hover:text-white hover:scale-[1.02] active:scale-[0.98]';
+        if (btnTravelerMob) btnTravelerMob.className = 'py-2 px-2 rounded-lg font-bold flex items-center justify-center space-x-1.5 transition-all bg-brand-600 text-white shadow-sm';
+        if (btnAgencyMob) btnAgencyMob.className = 'py-2 px-2 rounded-lg font-semibold flex items-center justify-center space-x-1.5 transition-all text-zinc-300 hover:text-white';
+        if (mobileStickyCta) mobileStickyCta.classList.remove('hidden');
+      } else {
+        viewTraveler.classList.add('hidden');
+        viewAgency.classList.remove('hidden');
+        if (btnAgency) btnAgency.className = 'px-4 py-1.5 rounded-full text-xs font-bold flex items-center space-x-2 transition-all duration-300 bg-brand-600 text-white shadow-sm hover:scale-[1.02] active:scale-[0.98]';
+        if (btnTraveler) btnTraveler.className = 'px-4 py-1.5 rounded-full text-xs font-semibold flex items-center space-x-2 transition-all duration-300 text-zinc-300 hover:text-white hover:scale-[1.02] active:scale-[0.98]';
+        if (btnAgencyMob) btnAgencyMob.className = 'py-2 px-2 rounded-lg font-bold flex items-center justify-center space-x-1.5 transition-all bg-brand-600 text-white shadow-sm';
+        if (btnTravelerMob) btnTravelerMob.className = 'py-2 px-2 rounded-lg font-semibold flex items-center justify-center space-x-1.5 transition-all text-zinc-300 hover:text-white';
+        if (mobileStickyCta) mobileStickyCta.classList.add('hidden');
+      }
+    }
+
+    function openInviteModal() {
+      document.getElementById('modal-invite').classList.remove('hidden');
+    }
+    function closeInviteModal() {
+      document.getElementById('modal-invite').classList.add('hidden');
+    }
+    function openApprovalModal() {
+      document.getElementById('modal-approval').classList.remove('hidden');
+    }
+    function closeApprovalModal() {
+      document.getElementById('modal-approval').classList.add('hidden');
+    }
+
+    function copyInviteLink() {
+      navigator.clipboard.writeText(document.getElementById('invite-link-input').value);
+      showToast('Link do roteiro copiado para a área de transferência!');
+    }
+
+    function copyReferralLink() {
+      navigator.clipboard.writeText("https://vivantia.com.br/indique/italia-vip-2026");
+      const btnText = document.getElementById('btn-copy-ref-text');
+      btnText.textContent = 'Link de Indicação Copiado!';
+      setTimeout(() => {
+        btnText.textContent = 'Copiar Meu Link Exclusivo de Indicação';
+      }, 3000);
+      showToast('Link de indicação copiado! Compartilhe e ganhe créditos.');
+    }
+
+    function copyPixCode() {
+      navigator.clipboard.writeText("00020126580014br.gov.bcb.pix0136vivant-ia-italia-9942");
+      showToast('Código Pix copiado! Abra o app do seu banco.');
+    }
+
+    function confirmBooking() {
+      closeApprovalModal();
+      showToast('🎉 Reserva aprovada! Sua consultora Fernanda foi notificada no WhatsApp.');
+    }
+
+    function simulateDownload(filename) {
+      showToast('Baixando ' + filename + ' (Disponível offline no PWA)...');
+    }
+
+    function triggerSimulatedWhatsApp(leadName, type) {
+      if (type === 'hot') {
+        showToast('📱 WhatsApp disparado para ' + leadName + ': "Vi que adorou o Hotel de Russie! Quer segurar a suíte?"');
+      } else {
+        showToast('📱 Mensagem anti-ghosting enviada com gatilho de expiração de tarifa.');
+      }
+    }
+
+    function simulatePixReminder(leadName, value) {
+      showToast('📲 Lembrete amigável de Pix enviado para ' + leadName + ' com código copia e cola (R$ ' + value + ').');
+    }
+
+    function simulateAction(msg) {
+      showToast('✅ ' + msg);
+    }
+
+    function changeActiveTrip(tripId) {
+      showToast('Filtrando Cockpit para: ' + tripId.toUpperCase());
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').textContent = msg;
+      toast.classList.remove('translate-y-28', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-28', 'opacity-0');
+      }, 3500);
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // ========================================================
+    // MÚSICA TRADICIONAL ITALIANA REAL (TARANTELLA EM ESTÚDIO)
+    // ========================================================
+    let isMusicPlaying = false;
+
+    function toggleItalianMusic() {
+      const audio = document.getElementById('audio-italian-music');
+      const btnText = document.getElementById('text-music-status');
+      const eq = document.getElementById('equalizer-bars');
+
+      if (!audio) return;
+
+      if (!isMusicPlaying) {
+        audio.play().then(() => {
+          isMusicPlaying = true;
+          if (btnText) btnText.textContent = "Pausar Trilha Italiana";
+          if (eq) {
+            eq.classList.remove('opacity-40');
+            eq.querySelectorAll('span').forEach(s => s.classList.add('animate-bounce'));
+          }
+          showToast("🎶 Tocando: Tarantella Napoletana Tradicional (Acordeão & Bandolim)!");
+        }).catch(err => {
+          console.log("Audio autoplay prevented by browser policy:", err);
+          showToast("Toque para iniciar a música");
+        });
+      } else {
+        audio.pause();
+        isMusicPlaying = false;
+        if (btnText) btnText.textContent = "Trilha Italiana ('O Sole Mio)";
+        if (eq) {
+          eq.classList.add('opacity-40');
+          eq.querySelectorAll('span').forEach(s => s.classList.remove('animate-bounce'));
+        }
+        showToast("Trilha italiana pausada.");
+      }
+    }
+
+    // Interação Dinâmica no Título Principal (Mobile & Desktop)
+    function triggerTitleInteraction() {
+      const title = document.getElementById('interactive-hero-title');
+      const hint = document.getElementById('title-hint-text');
+      
+      title.classList.add('scale-[1.02]', 'text-rose-300');
+      if (hint) hint.textContent = "✨ Benvenuti in Italia! Imersão sensorial e Tarantella Napoletana ativadas.";
+      
+      // Resposta tátil no mobile se suportado
+      if (navigator.vibrate) {
+        navigator.vibrate([40, 50, 40]);
+      }
+      
+      // Toca a música italiana real se ainda não estiver tocando
+      if (!isMusicPlaying) {
+        toggleItalianMusic();
+      }
+
+      setTimeout(() => {
+        title.classList.remove('scale-[1.02]', 'text-rose-300');
+      }, 700);
+
+      showToast("🇮🇹 Benvenuti in Italia! Trilha sonora e atmosfera italiana ativadas.");
+    }
+
+    // Simulação do Disparo no WhatsApp do Gestor
+    function simulateManagerWhatsAppAlert() {
+      const banner = document.getElementById('banner-manager-whatsapp');
+      banner.classList.remove('hidden');
+      setTimeout(() => {
+        banner.classList.remove('-translate-y-48');
+        banner.classList.add('translate-y-0');
+      }, 40);
+
+      // Chime sonoro de notificação suave
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(659.25, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880.00, ctx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.35);
+      } catch (e) {}
+
+      showToast("📲 Nova notificação de deadline disparada no WhatsApp do Gestor!");
+    }
+
+    function dismissManagerBanner() {
+      const banner = document.getElementById('banner-manager-whatsapp');
+      banner.classList.remove('translate-y-0');
+      banner.classList.add('-translate-y-48');
+      setTimeout(() => {
+        banner.classList.add('hidden');
+      }, 500);
+    }
+  </script>
+</body>
+</html>
