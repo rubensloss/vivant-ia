@@ -239,11 +239,34 @@
           </div>
         </div>
 
-        <!-- Subtítulo Editorial Elegante em Branco/Champagne de Alta Legibilidade -->
-        <div class="border-l-2 border-brand-500/80 pl-4 py-1 mb-6 sm:mb-8 max-w-2xl">
-          <p class="text-sm sm:text-base lg:text-lg text-zinc-100 font-normal leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-            Expedição de Alto Padrão com saídas selecionadas. Dez dias imersivos pela Itália combinando <span class="text-amber-300 font-semibold">arte renascentista</span>, <span class="text-amber-300 font-semibold">alta gastronomia toscana</span> e navegação privativa pelas falésias de <span class="text-white font-semibold">Positano e Capri</span>. Consultoria exclusiva sob medida.
+        <!-- Subtítulo Interativo em Fonte Display Marcante (Efeito Itália ao passar o dedo/cursor) -->
+        <div id="interactive-hero-subtitle" onclick="triggerTitleInteraction()" class="group/sub cursor-pointer max-w-3xl mb-6 sm:mb-8 transition-all duration-300 select-none active:scale-[0.99]">
+          <p class="font-display font-bold text-base sm:text-xl lg:text-2xl text-white leading-snug sm:leading-relaxed drop-shadow-[0_3px_12px_rgba(0,0,0,0.95)] tracking-wide">
+            Expedição de Alto Padrão com saídas selecionadas. Dez dias imersivos pela 
+            <span class="inline-block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-white to-red-500 font-extrabold underline decoration-emerald-400/50 underline-offset-4 group-hover/sub:from-emerald-300 group-hover/sub:to-red-400 transition-all duration-500">
+              Itália
+            </span> 
+            combinando 
+            <span class="text-emerald-300 group-hover/sub:text-emerald-200 font-bold transition-colors">
+              arte renascentista
+            </span>, 
+            <span class="text-amber-200 group-hover/sub:text-white font-bold transition-colors">
+              alta gastronomia toscana
+            </span> 
+            e navegação privativa pelas falésias de 
+            <span class="text-rose-400 group-hover/sub:text-rose-300 font-bold transition-colors">
+              Positano e Capri
+            </span>. 
+            <span class="block sm:inline mt-1 sm:mt-0 text-zinc-200 group-hover/sub:text-white font-medium text-xs sm:text-base">
+              Consultoria exclusiva sob medida.
+            </span>
           </p>
+          <div class="flex items-center space-x-2 mt-2 text-[10px] sm:text-xs text-zinc-300 opacity-80 group-hover/sub:opacity-100 transition-opacity">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse" style="animation-delay: 0.15s"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" style="animation-delay: 0.3s"></span>
+            <span class="text-zinc-300">Toque no texto para ver os efeitos e cores da Itália</span>
+          </div>
         </div>
 
         <!-- Barra de Ações Rápidas (Grid 2 colunas no celular / Linha fluida no desktop) -->
@@ -2535,12 +2558,14 @@
       }
     }
 
-    // Interação Dinâmica no Título Principal (Mobile & Desktop)
+    // Interação Dinâmica no Título e Subtítulo Principal (Mobile & Desktop)
     function triggerTitleInteraction() {
       const title = document.getElementById('interactive-hero-title');
+      const subtitle = document.getElementById('interactive-hero-subtitle');
       const hint = document.getElementById('title-hint-text');
       
-      title.classList.add('scale-[1.02]', 'text-rose-300');
+      if (title) title.classList.add('scale-[1.02]', 'text-rose-300');
+      if (subtitle) subtitle.classList.add('scale-[1.015]', 'brightness-110');
       if (hint) hint.textContent = "✨ Benvenuti in Italia! Imersão sensorial e Tarantella Napoletana ativadas.";
       
       // Resposta tátil no mobile se suportado
@@ -2554,7 +2579,8 @@
       }
 
       setTimeout(() => {
-        title.classList.remove('scale-[1.02]', 'text-rose-300');
+        if (title) title.classList.remove('scale-[1.02]', 'text-rose-300');
+        if (subtitle) subtitle.classList.remove('scale-[1.015]', 'brightness-110');
       }, 700);
 
       showToast("🇮🇹 Benvenuti in Italia! Trilha sonora e atmosfera italiana ativadas.");
